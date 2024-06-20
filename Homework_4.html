@@ -70,6 +70,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="Homework_4_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="Homework_4_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -144,6 +173,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><mark> A variable can be named sd within a function and not cause issues with the sd function because the sd within your function is local to your function’s environment while the sd function exists within the stats package which is a parent environment. <mark></mark></mark></li>
 </ul>
+</section>
+</section>
+<section id="task-2" class="level1">
+<h1>Task 2:</h1>
+<ol type="1">
+<li><ol type="1">
+<li>When we start doing machine learning later in the course, a common metric used to evaluate predictions is called Root Mean Square Error (RMSE). For a given set of responses, <span class="math inline">\(y_1\)</span>, …, <span class="math inline">\(y_n\)</span> (variable of interest that we want to predict) and a set of corresponding predictions for those observations, <span class="math inline">\(\hat{y_1}\)</span>, …, <span class="math inline">\(\hat{y_n}\)</span> the RMSE is defined as</li>
+</ol></li>
+</ol>
+<p><span class="math display">\[RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2}\]</span></p>
+<p>1 n Xn i=1 (yi − ˆyi)2 Write a basic function (call it getRMSE()) that takes in a vector of responses and a vector of predictions and outputs the RMSE.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -159,7 +199,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
-</section>
 </section>
 
 </main>

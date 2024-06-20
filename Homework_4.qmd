@@ -5,7 +5,9 @@ date: "25 June 2024"
 format: html
 editor: visual
 ---
-
+```{r Load Libraries, warning=FALSE}
+library(tidyverse)
+```
 # Task 1: Conceptual Questions
 
 ## Questions
@@ -30,7 +32,38 @@ editor: visual
 
 + <mark> A variable can be named sd within a function and not cause issues with the sd function because the sd within your function is local to your function's environment while the sd function exists within the stats package which is a parent environment. <mark>
 
-```{r, warning=FALSE}
-library(tidyverse)
+
+# Task 2:
+
+1. 1. When we start doing machine learning later in the course, a common metric used to evaluate predictions is called Root Mean Square Error (RMSE). For a given set of responses, $y_1$, ..., $y_n$ (variable of interest that we want to predict) and a set of corresponding predictions for those observations, $\hat{y_1}$, ..., $\hat{y_n}$ the RMSE is defined as 
+
+$$RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2}$$
+Write a basic function (call it getRMSE()) that takes in a *vector* of responses and a *vector* of predictions and outputs the RMSE.
+
+```{r RMSE Function}
+getRMSE<-function(vec1,vec2,...){
+  mean<- mean(vec1,...)
+  rmse <- sqrt(1/length(vec1)*((mean(vec1-vec2))^2))
+  rmse
+}
+
+set.seed(10)
+n <- 100
+x <- runif(n)
+resp <- 3 + 10*x + rnorm(n)
+pred <- predict(lm(resp ~ x), data.frame(x))
+
+
+getRMSE(resp,pred)
+
+for (i in 1:2) {
+  j<-sample(1:100,1)
+  resp[j]<-NA_real_
+}
+resp
+
+getRMSE(resp,pred)
+
+getRMSE(resp,pred,na.rm=TRUE)
 ```
 
