@@ -1,0 +1,36 @@
+---
+title: "Homework 4"
+author: "Andrew Harvey"
+date: "25 June 2024"
+format: html
+editor: visual
+---
+
+# Task 1: Conceptual Questions
+
+## Questions
+
+1. What is the purpose of the lapply() function? What is the equivalent purrr function?
+
++ <mark>The lapply() function takes in a list, and a function then applys the function to each element of the list, it then returns a list where each element is the output from the function. The equivalent purr function is map().<mark>
+
+2. Suppose we have a list called my_list. Each element of the list is a numeric data frame (all columns are numeric). We want use lapply() to run the code cor(numeric_matrix, method = "kendall") on each element of the list. Write code to do this below! (I’m really trying to ask you how you specify method = "kendall" when calling lapply()).
+
++ <mark> lapply(my_list, FUN = cor, method = "kendall") <mark>
+
+3. What are two advantages of using purrr functions instead of the BaseR apply family?
+
++ <mark> The first advantage is that the purr functions are consistent while the apply family is not. Hadley gives the example of `lapply()` and `mapply()` where `lappy()` has the first argument being data and `mapply()` has the function as the first argument. Purr functions always have data as the first argument. Second, you can predict the output of the purr functions where the same can not be said for the apply family functions. [Source](https://stackoverflow.com/questions/45101045/why-use-purrrmap-instead-of-lapply) <mark>
+
+4. What is a side-effect function?
+
++ <mark> A side-effect function is a function where some output or other task is presented but nothing is done to the data. `Print()`, `cat()`, and  `plot()` are examples of side-effect functions.<mark>
+
+5. Why can you name a variable sd in a function and not cause any issues with the sd function?
+
++ <mark> A variable can be named sd within a function and not cause issues with the sd function because the sd within your function is local to your function's environment while the sd function exists within the stats package which is a parent environment. <mark>
+
+```{r, warning=FALSE}
+library(tidyverse)
+```
+
