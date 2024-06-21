@@ -42,8 +42,8 @@ Write a basic function (call it getRMSE()) that takes in a *vector* of responses
 
 ```{r RMSE Function}
 getRMSE<-function(vec1,vec2,...){
-  mean<- mean(vec1,...)
-  rmse <- sqrt(1/length(vec1)*((mean(vec1-vec2))^2))
+  #mean<- mean(vec1,...)
+  rmse <- sqrt(1/length(vec1)*((mean(vec1-vec2,...))^2))
   rmse
 }
 
