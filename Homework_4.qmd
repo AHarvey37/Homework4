@@ -14,56 +14,134 @@ library(tidyverse)
 
 1. What is the purpose of the lapply() function? What is the equivalent purrr function?
 
-+ <mark>The lapply() function takes in a list, and a function then applys the function to each element of the list, it then returns a list where each element is the output from the function. The equivalent purr function is map().<mark>
+* <mark>The lapply() function takes in a list, and a function then applys the function to each element of the list, it then returns a list where each element is the output from the function. The equivalent purr function is map().<mark>
 
 2. Suppose we have a list called my_list. Each element of the list is a numeric data frame (all columns are numeric). We want use lapply() to run the code cor(numeric_matrix, method = "kendall") on each element of the list. Write code to do this below! (I’m really trying to ask you how you specify method = "kendall" when calling lapply()).
 
-+ <mark> lapply(my_list, FUN = cor, method = "kendall") <mark>
+* <mark> lapply(my_list, FUN = cor, method = "kendall") <mark>
 
 3. What are two advantages of using purrr functions instead of the BaseR apply family?
 
-+ <mark> The first advantage is that the purr functions are consistent while the apply family is not. Hadley gives the example of `lapply()` and `mapply()` where `lappy()` has the first argument being data and `mapply()` has the function as the first argument. Purr functions always have data as the first argument. Second, you can predict the output of the purr functions where the same can not be said for the apply family functions. [Source](https://stackoverflow.com/questions/45101045/why-use-purrrmap-instead-of-lapply) <mark>
+* <mark> The first advantage is that the purr functions are consistent while the apply family is not. Hadley gives the example of `lapply()` and `mapply()` where `lappy()` has the first argument being data and `mapply()` has the function as the first argument. Purr functions always have data as the first argument. Second, you can predict the output of the purr functions where the same can not be said for the apply family functions. [Source](https://stackoverflow.com/questions/45101045/why-use-purrrmap-instead-of-lapply) <mark>
 
 4. What is a side-effect function?
 
-+ <mark> A side-effect function is a function where some output or other task is presented but nothing is done to the data. `Print()`, `cat()`, and  `plot()` are examples of side-effect functions.<mark>
+* <mark> A side-effect function is a function where some output or other task is presented but nothing is done to the data. `Print()`, `cat()`, and  `plot()` are examples of side-effect functions.<mark>
 
 5. Why can you name a variable sd in a function and not cause any issues with the sd function?
 
-+ <mark> A variable can be named sd within a function and not cause issues with the sd function because the sd within your function is local to your function's environment while the sd function exists within the stats package which is a parent environment. <mark>
+* <mark> A variable can be named sd within a function and not cause issues with the sd function because the sd within your function is local to your function's environment while the sd function exists within the stats package which is a parent environment. <mark>
 
 
 # Task 2:
 
-1. 1. When we start doing machine learning later in the course, a common metric used to evaluate predictions is called Root Mean Square Error (RMSE). For a given set of responses, $y_1$, ..., $y_n$ (variable of interest that we want to predict) and a set of corresponding predictions for those observations, $\hat{y_1}$, ..., $\hat{y_n}$ the RMSE is defined as 
+1. When we start doing machine learning later in the course, a common metric used to evaluate predictions is called Root Mean Square Error (RMSE). For a given set of responses, $y_1$, ..., $y_n$ (variable of interest that we want to predict) and a set of corresponding predictions for those observations, $\hat{y_1}$, ..., $\hat{y_n}$ the RMSE is defined as $$RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2}$$ Write a basic function (call it getRMSE()) that takes in a *vector* of responses and a *vector* of predictions and outputs the RMSE.
 
-$$RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2}$$
-Write a basic function (call it getRMSE()) that takes in a *vector* of responses and a *vector* of predictions and outputs the RMSE.
+* If a value is missing for the vector of responses (i.e. an NA is present), allow for additional arguments to the **mean()** function (ellipses) that removes the **NA** values in the computation.
+
+<mark>Create the RMSE function with an ellipsis argument to enable additional arguments to be passed. Add the ellipsis argument to the mean function. Returns the RMSE.<mark>
 
 ```{r RMSE Function}
 getRMSE<-function(vec1,vec2,...){
-  #mean<- mean(vec1,...)
-  rmse <- sqrt(1/length(vec1)*((mean(vec1-vec2,...))^2))
+  #rmse <- sqrt(1/length(vec1)*((mean(vec1-vec2,...))^2))
+  rmse <- sqrt(mean((vec1-vec2)^2,...))
   rmse
 }
+```
 
+2. Run the following code to create some response values and predictions.
+
+```{r Create random # vector and linear model vector}
 set.seed(10)
 n <- 100
 x <- runif(n)
 resp <- 3 + 10*x + rnorm(n)
 pred <- predict(lm(resp ~ x), data.frame(x))
+```
 
+* Test your RMSE function using this data. 
 
+```{r Test RMSE function}
 getRMSE(resp,pred)
+```
 
+* Repeat after replacing two of the response values with missing values (NA_real_).
+
+```{r Assign missing values}
+# For loop to randomly select 2 elements of resp to make NA
 for (i in 1:2) {
-  j<-sample(1:100,1)
+  j<-ceiling(runif(1,min = 1, max = 100))
   resp[j]<-NA_real_
 }
+# Check resp
 resp
 
+```
+
+  -- Test your RMSE function with and without specifying the behavior to deal with missing values.
+  
+```{r Test RMSE function with and without na.rm}
+# Test RMSE with NA vector
 getRMSE(resp,pred)
 
+# Test RMSE with additional na.rm argument
 getRMSE(resp,pred,na.rm=TRUE)
 ```
 
+3. Another common metric for evaluating predictions is mean absolute deviation given by $$MAE = \frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y_i}|$$ Write a function called `getMAE()` that follows the specification of the `getRMSE()` function. 
+
+```{r MAE function}
+getMAE<- function(vec1,vec2,...){
+  mae<- mean(abs(vec1-vec2),...)
+  mae
+}
+```
+
+4. Run the following code to create some response values and predictions. 
+
+```{r Create response adn prediction values}
+set.seed(10)
+n <- 100
+x <- runif(n)
+resp <- 3 + 10*x + rnorm(n)
+pred <- predict(lm(resp ~ x), data.frame(x))
+```
+
+* Test your MAE function using this data.
+
+```{r Test MAE}
+getMAE(resp, pred)
+```
+
+* Repeat after replacing two of the response values with missing values (`NA_real_`).
+
+```{r Replace}
+# For loop to randomly select 2 elements of resp to make NA
+for (i in 1:2) {
+  j<-ceiling(runif(1,min = 1, max = 100))
+  resp[j]<-NA_real_
+}
+# Check resp
+resp
+```
+  -- Test your MAE function with and without specifying the behavior to deal with missing values.
+  
+```{r Test MAE function with adn without na.rm}
+getMAE(resp, pred)
+getMAE(resp,pred,na.rm = TRUE)
+```
+
+5. Let's create a **wrapper** function that can be used to get either or both metrics returned with a single function call. Do not rewrite your above two function, call them inside the wrapper function (we would call the `getRMSE()` and `getMAE()` function **helper** functions). When returning your Values, giving them appropriate names.
+
+```{r Wrapper function}
+my_wrapper<- function(vec1,vec2,...){
+  list(getMAE(vec1,vec2,...),
+       getRMSE(vec1,vec2,...))
+}
+
+my_wrapper(resp,pred,na.rm=TRUE)
+```
+
+
+* The function should check that two numeric (atomic) vectors have been passed (consider `is.vector()`,`is.atomic()`, and `is.numeric()`). If not, a message should print and the function should exit. 
+* The function should return both metrics by default and include names. The behavior should be able to be changed using a character string of metrics to find. 

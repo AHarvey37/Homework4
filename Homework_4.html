@@ -139,6 +139,21 @@ window.Quarto = {
 </header>
 
 
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
 <section id="task-1-conceptual-questions" class="level1">
 <h1>Task 1: Conceptual Questions</h1>
 <section id="questions" class="level2">
@@ -178,25 +193,77 @@ window.Quarto = {
 <section id="task-2" class="level1">
 <h1>Task 2:</h1>
 <ol type="1">
-<li><ol type="1">
-<li>When we start doing machine learning later in the course, a common metric used to evaluate predictions is called Root Mean Square Error (RMSE). For a given set of responses, <span class="math inline">\(y_1\)</span>, …, <span class="math inline">\(y_n\)</span> (variable of interest that we want to predict) and a set of corresponding predictions for those observations, <span class="math inline">\(\hat{y_1}\)</span>, …, <span class="math inline">\(\hat{y_n}\)</span> the RMSE is defined as</li>
-</ol></li>
+<li>When we start doing machine learning later in the course, a common metric used to evaluate predictions is called Root Mean Square Error (RMSE). For a given set of responses, <span class="math inline">\(y_1\)</span>, …, <span class="math inline">\(y_n\)</span> (variable of interest that we want to predict) and a set of corresponding predictions for those observations, <span class="math inline">\(\hat{y_1}\)</span>, …, <span class="math inline">\(\hat{y_n}\)</span> the RMSE is defined as <span class="math display">\[RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2}\]</span> Write a basic function (call it getRMSE()) that takes in a <em>vector</em> of responses and a <em>vector</em> of predictions and outputs the RMSE.</li>
 </ol>
-<p><span class="math display">\[RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2}\]</span></p>
-<p>1 n Xn i=1 (yi − ˆyi)2 Write a basic function (call it getRMSE()) that takes in a vector of responses and a vector of predictions and outputs the RMSE.</p>
+<ul>
+<li>If a value is missing for the vector of responses (i.e.&nbsp;an NA is present), allow for additional arguments to the <strong>mean()</strong> function (ellipses) that removes the <strong>NA</strong> values in the computation.</li>
+</ul>
+<div class="line-block">&nbsp;&nbsp;Create the RMSE function with an ellipsis argument to enable additional arguments to be passed. Add the ellipsis argument to the mean function. Returns the RMSE.</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>getRMSE<span class="ot">&lt;-</span><span class="cf">function</span>(vec1,vec2,...){</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  rmse <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(vec1)<span class="sc">*</span>((<span class="fu">mean</span>(vec1<span class="sc">-</span>vec2,...))<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  rmse</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Run the following code to create some response values and predictions.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>resp <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">10</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="fu">lm</span>(resp <span class="sc">~</span> x), <span class="fu">data.frame</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Test your RMSE function using this data.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getRMSE</span>(resp,pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.636992e-17</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Repeat after replacing two of the response values with missing values (NA_real_).</p>
+<p>– Test your RMSE function with and without specifying the behavior to deal with missing values.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For loop to randomly select 2 elements of resp to make NA</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  j<span class="ot">&lt;-</span><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="dv">1</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  resp[j]<span class="ot">&lt;-</span><span class="cn">NA_real_</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check resp</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>resp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1]  7.674144  5.733128  8.637031 12.068788  4.357179  6.040709  4.843093
+  [8]  6.255948  8.512399  7.587703  8.278962        NA  3.304767        NA
+ [15]  7.646876  8.504220  4.254724  5.160568  7.550652 10.115022 12.028134
+ [22]  7.723097  9.702653  6.337183  5.568563 11.239175  9.903050  4.965503
+ [29]  9.656077  8.081564  8.948798  3.708220  5.410925 12.714925  7.666618
+ [36] 10.636295 11.886290 14.767056  8.670500  7.931076  5.338484  5.097557
+ [43]  3.213884 11.444994  6.093762  3.192188  1.563749  8.753929  4.177170
+ [50] 12.242498  5.781476 12.783701  4.418721  8.442989  4.282396  9.395394
+ [57]  8.255719  6.016290  8.026494  9.180810  2.038727  5.273544  7.225220
+ [64]  6.654107 12.260485 10.688362  9.773488  8.216967  5.093565  6.142304
+ [71]  3.274337  8.547150  9.381826  7.061813  4.016495  7.543794  6.976389
+ [78] 11.550401  5.209433  3.872522 13.043037  8.277356  3.231859  8.553664
+ [85]  4.576422  2.213665 11.475262  6.469006  5.333390  5.656304  6.209727
+ [92]  8.908905  6.956097  9.642321  7.188749 12.413663  6.020730  8.507994
+ [99] 11.776177  3.387353</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test RMSE with NA vector</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getRMSE</span>(resp,pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test RMSE with additional na.rm argument</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getRMSE</span>(resp,pred,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0003344786</code></pre>
 </div>
 </div>
 </section>
