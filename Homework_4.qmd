@@ -133,15 +133,52 @@ getMAE(resp,pred,na.rm = TRUE)
 
 5. Let's create a **wrapper** function that can be used to get either or both metrics returned with a single function call. Do not rewrite your above two function, call them inside the wrapper function (we would call the `getRMSE()` and `getMAE()` function **helper** functions). When returning your Values, giving them appropriate names.
 
+* The function should check that two numeric (atomic) vectors have been passed (consider `is.vector()`,`is.atomic()`, and `is.numeric()`). If not, a message should print and the function should exit. 
+* The function should return both metrics by default and include names. The behavior should be able to be changed using a character string of metrics to find. 
+
 ```{r Wrapper function}
-my_wrapper<- function(vec1,vec2,...){
-  list(getMAE(vec1,vec2,...),
-       getRMSE(vec1,vec2,...))
+my_wrapper<- function(vec1,vec2,fun = NULL,...){
+  if(!is.vector(vec1) | !is.vector(vec2)){
+    stop("Error: One or more arguments is not a vector")
+  }
+  else if(!is.numeric(vec1) | !is.numeric(vec2)){
+    stop("Error: One or more arguments is not numeric")
+  }
+  else if(!is.atomic(vec1) | !is.atomic(vec2)){
+    stop("Error: One or more arguments is not atomic")
+  }
+  
+  if(!is.null(fun)){
+    my_fun <- get(fun)
+    my_fun(vec1,vec2,...)
+    }
+  else{
+    return(list("getMAE",
+                getMAE(vec1,vec2,...),
+                "getRMSE",
+                getRMSE(vec1,vec2,...)))
+  }
+#  my_fun(vec1,vec2,...)
+  # list(getMAE(vec1,vec2,...),
+  #      getRMSE(vec1,vec2,...))
 }
 
-my_wrapper(resp,pred,na.rm=TRUE)
+#my_wrapper(resp,pred,"getMAE",na.rm=TRUE)
+```
+
+```{r Test Wrapper}
+set.seed(10)
+n <- 100
+x <- runif(n)
+resp <- 3 + 10*x + rnorm(n)
+pred <- predict(lm(resp ~ x), data.frame(x))
+is.vector(resp)
+is.vector(pred)
+is.numeric(resp)
+is.numeric(pred)
+is.atomic(resp)
+is.atomic(pred)
+my_wrapper(resp, pred)
 ```
 
 
-* The function should check that two numeric (atomic) vectors have been passed (consider `is.vector()`,`is.atomic()`, and `is.numeric()`). If not, a message should print and the function should exit. 
-* The function should return both metrics by default and include names. The behavior should be able to be changed using a character string of metrics to find. 
