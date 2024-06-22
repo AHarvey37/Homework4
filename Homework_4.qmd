@@ -153,10 +153,10 @@ my_wrapper<- function(vec1,vec2,fun = NULL,...){
     my_fun(vec1,vec2,...)
     }
   else{
-    return(list("getMAE",
-                getMAE(vec1,vec2,...),
-                "getRMSE",
-                getRMSE(vec1,vec2,...)))
+    return_val<-list(getMAE(vec1,vec2,...),
+                     getRMSE(vec1,vec2,...))
+    names(return_val)<-c("MAE","RMSE")
+    return(return_val)
   }
 #  my_fun(vec1,vec2,...)
   # list(getMAE(vec1,vec2,...),
