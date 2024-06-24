@@ -8,7 +8,7 @@ editor: visual
 ```{r Load Libraries, warning=FALSE}
 library(tidyverse)
 ```
-# Task 1: Conceptual Questions
+# Task 1 - Conceptual Questions
 
 ## Questions
 
@@ -33,7 +33,7 @@ library(tidyverse)
 * <mark> A variable can be named sd within a function and not cause issues with the sd function because the sd within your function is local to your function's environment while the sd function exists within the stats package which is a parent environment. <mark>
 
 
-# Task 2:
+# Task 2 - Writing R Functions
 
 1. When we start doing machine learning later in the course, a common metric used to evaluate predictions is called Root Mean Square Error (RMSE). For a given set of responses, $y_1$, ..., $y_n$ (variable of interest that we want to predict) and a set of corresponding predictions for those observations, $\hat{y_1}$, ..., $\hat{y_n}$ the RMSE is defined as $$RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2}$$ Write a basic function (call it getRMSE()) that takes in a *vector* of responses and a *vector* of predictions and outputs the RMSE.
 
@@ -60,12 +60,15 @@ pred <- predict(lm(resp ~ x), data.frame(x))
 ```
 
 * Test your RMSE function using this data. 
+<mark> Quickly tests the RMSE function by passing in the response and prediction vectors.<mark>
 
 ```{r Test RMSE function}
 getRMSE(resp,pred)
 ```
 
 * Repeat after replacing two of the response values with missing values (NA_real_).
+
+<mark> Assigned NA value to two random locations in the response vector.<mark>
 
 ```{r Assign missing values}
 # For loop to randomly select 2 elements of resp to make NA
@@ -80,6 +83,7 @@ resp
 
   -- Test your RMSE function with and without specifying the behavior to deal with missing values.
   
+  <mark> Tests the function without and with removal of missing values. When missing values are present the function should return "NA" and when missing values are removed the function should return a double. <mark>
 ```{r Test RMSE function with and without na.rm}
 # Test RMSE with NA vector
 getRMSE(resp,pred)
@@ -89,6 +93,8 @@ getRMSE(resp,pred,na.rm=TRUE)
 ```
 
 3. Another common metric for evaluating predictions is mean absolute deviation given by $$MAE = \frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y_i}|$$ Write a function called `getMAE()` that follows the specification of the `getRMSE()` function. 
+
+<mark> Create the MAE function with ellipses to allow additional arguments. <mark>
 
 ```{r MAE function}
 getMAE<- function(vec1,vec2,...){
@@ -109,11 +115,15 @@ pred <- predict(lm(resp ~ x), data.frame(x))
 
 * Test your MAE function using this data.
 
+<mark> Test the `getMAE` function, should return a double. <mark>
+
 ```{r Test MAE}
 getMAE(resp, pred)
 ```
 
 * Repeat after replacing two of the response values with missing values (`NA_real_`).
+
+<mark> Assigned NA value to two random locations in the response vector.<mark>
 
 ```{r Replace}
 # For loop to randomly select 2 elements of resp to make NA
@@ -126,6 +136,8 @@ resp
 ```
   -- Test your MAE function with and without specifying the behavior to deal with missing values.
   
+  <mark> Tests the function without and with removal of missing values. When missing values are present the function should return "NA" and when missing values are removed the function should return a double. <mark>
+  
 ```{r Test MAE function with adn without na.rm}
 getMAE(resp, pred)
 getMAE(resp,pred,na.rm = TRUE)
@@ -136,6 +148,7 @@ getMAE(resp,pred,na.rm = TRUE)
 * The function should check that two numeric (atomic) vectors have been passed (consider `is.vector()`,`is.atomic()`, and `is.numeric()`). If not, a message should print and the function should exit. 
 * The function should return both metrics by default and include names. The behavior should be able to be changed using a character string of metrics to find. 
 
+<mark> Create a wrapper function. Function has two if/else statements. The first if/else checks if the passed functions are atomic, numeric vectors. If either of the passed arguments are not one of those three conditions then it will stop running and return an error stating which condition it did not meet. The second if/else statement determines which function, `getMAE()` or `getRMSE()`, to call. If it is not specified then it will return both functions. <mark>
 ```{r Wrapper function}
 my_wrapper<- function(vec1,vec2,fun = NULL,...){
   if(!is.vector(vec1) | !is.vector(vec2)){
@@ -150,35 +163,111 @@ my_wrapper<- function(vec1,vec2,fun = NULL,...){
   
   if(!is.null(fun)){
     my_fun <- get(fun)
-    my_fun(vec1,vec2,...)
+    cat(gsub("get",'',fun), my_fun(vec1,vec2,...),"\n\n")
     }
   else{
     return_val<-list(getMAE(vec1,vec2,...),
                      getRMSE(vec1,vec2,...))
     names(return_val)<-c("MAE","RMSE")
-    return(return_val)
+    return(return_val[])
   }
-#  my_fun(vec1,vec2,...)
-  # list(getMAE(vec1,vec2,...),
-  #      getRMSE(vec1,vec2,...))
 }
 
-#my_wrapper(resp,pred,"getMAE",na.rm=TRUE)
 ```
 
-```{r Test Wrapper}
+6. Run the following code to create some response values and predictions. 
+
+```{r}
 set.seed(10)
 n <- 100
 x <- runif(n)
 resp <- 3 + 10*x + rnorm(n)
 pred <- predict(lm(resp ~ x), data.frame(x))
-is.vector(resp)
-is.vector(pred)
-is.numeric(resp)
-is.numeric(pred)
-is.atomic(resp)
-is.atomic(pred)
-my_wrapper(resp, pred)
 ```
 
+* Test your new function using this data. Call it once asking for each metric individually and one specifying both metrics.
+
+<mark> Tests the wrapper function. <mark>
+
+```{r Test Wrapper}
+my_wrapper(resp, pred,"getMAE")
+
+my_wrapper(resp, pred,"getRMSE")
+
+my_wrapper(resp, pred)
+```
+* Repeat with replacing two of the response values with missing values (`NA_real_`).
+
+```{r Replace two response values w/ NA}
+# For loop to randomly select 2 elements of resp to make NA
+for (i in 1:2) {
+  j<-runif(1,min = 1, max = 100)
+  resp[j]<-NA_real_
+}
+# Check response values
+resp
+```
+
+*Finally, test your function by passing it incorrect data (i.e a data frame or something else instead of vectors).
+
+<mark> Test function, which should return an error message. <mark>
+
+```{r Test function with incorrect data, error=TRUE}
+# Force resp to be a matrix
+resp<-as.matrix(resp)
+
+# Test wrapper function
+my_wrapper(resp, pred,"getMAE")
+
+```
+
+# Task 3 - Querying an API and a Tidy-Style Function
+
+For this section, you'll connect to the news API here: [newsapi.org](https://newsapi.org/). You'll need to go to register for a key at that web site!
+
+1. Use `Get()` from the `httr` package to return information about a topic that you are interested in that has been in the new lately (store the result as an R object). Note: We can only look 30 days into the past with a free account. 
+
+```{r}
+#load httr package
+library(httr)
+#contact API and search for articles containing "military"
+news_search_military<- GET("https://newsapi.org/v2/everything?q=military&apiKey=6960626c89a2457397c4a992e8b46363")
+```
+
+2. Parse what is returned and find you way to the data frame that has the actual article information in it (check `content`). Note the first column should be a list column!
+
+```{r}
+library(jsonlite)
+str(news_search_military,max.level = 1)
+parsed<-as_tibble(fromJSON(rawToChar(news_search_military$content)))
+parsed<-parsed$articles|>
+  select(-source)
+parsed
+```
+
+3. Now write a quick function that allows the user to easily query this API. The inputs to the function should be the title/subject to search for (string), a time period to search from (string - you'll search from that time until the present), and an API key.
+
+```{r API Search Function}
+search_NewsAPI <- function(title, date=today("UTC"), APIkey = "6960626c89a2457397c4a992e8b46363"){
+  keyword<-as.character(title)
+  fromTime<-as.character(date)
+  toTime<-as.character(today()-days(30))
+  APIkey<-as.character(APIkey)
+  .x<- httr::GET(paste0("https://newsapi.org/v2/everything?q=",keyword,"&from=",fromTime,"to=",toTime,"&apiKey=",APIkey))
+  
+  .d<-as_tibble(fromJSON(rawToChar(.x$content)))
+  .d<-.d$articles|>
+    select(-source)
+  return(.d)
+}
+```
+
+```{r Test function}
+#test just using keyword
+search_NewsAPI("Army")
+
+# test using keyword and date
+search_NewsAPI("monkey","2024-05-30")
+
+```
 
