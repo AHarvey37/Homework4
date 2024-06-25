@@ -154,8 +154,8 @@ window.Quarto = {
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
-<section id="task-1-conceptual-questions" class="level1">
-<h1>Task 1: Conceptual Questions</h1>
+<section id="task-1---conceptual-questions" class="level1">
+<h1>Task 1 - Conceptual Questions</h1>
 <section id="questions" class="level2">
 <h2 class="anchored" data-anchor-id="questions">Questions</h2>
 <ol type="1">
@@ -190,20 +190,21 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="task-2" class="level1">
-<h1>Task 2:</h1>
+<section id="task-2---writing-r-functions" class="level1">
+<h1>Task 2 - Writing R Functions</h1>
 <ol type="1">
 <li>When we start doing machine learning later in the course, a common metric used to evaluate predictions is called Root Mean Square Error (RMSE). For a given set of responses, <span class="math inline">\(y_1\)</span>, …, <span class="math inline">\(y_n\)</span> (variable of interest that we want to predict) and a set of corresponding predictions for those observations, <span class="math inline">\(\hat{y_1}\)</span>, …, <span class="math inline">\(\hat{y_n}\)</span> the RMSE is defined as <span class="math display">\[RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2}\]</span> Write a basic function (call it getRMSE()) that takes in a <em>vector</em> of responses and a <em>vector</em> of predictions and outputs the RMSE.</li>
 </ol>
 <ul>
 <li>If a value is missing for the vector of responses (i.e.&nbsp;an NA is present), allow for additional arguments to the <strong>mean()</strong> function (ellipses) that removes the <strong>NA</strong> values in the computation.</li>
 </ul>
-<div class="line-block">&nbsp;&nbsp;Create the RMSE function with an ellipsis argument to enable additional arguments to be passed. Add the ellipsis argument to the mean function. Returns the RMSE.</div>
+<p><mark>Create the RMSE function with an ellipsis argument to enable additional arguments to be passed. Add the ellipsis argument to the mean function. Returns the RMSE.<mark></mark></mark></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>getRMSE<span class="ot">&lt;-</span><span class="cf">function</span>(vec1,vec2,...){</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  rmse <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(vec1)<span class="sc">*</span>((<span class="fu">mean</span>(vec1<span class="sc">-</span>vec2,...))<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  rmse</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#rmse &lt;- sqrt(1/length(vec1)*((mean(vec1-vec2,...))^2))</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  rmse <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((vec1<span class="sc">-</span>vec2)<span class="sc">^</span><span class="dv">2</span>,...))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  rmse</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
 <li>Run the following code to create some response values and predictions.</li>
@@ -218,30 +219,210 @@ window.Quarto = {
 <ul>
 <li>Test your RMSE function using this data.</li>
 </ul>
+<p><mark> Quickly tests the RMSE function by passing in the response and prediction vectors.<mark></mark></mark></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getRMSE</span>(resp,pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.636992e-17</code></pre>
+<pre><code>[1] 0.9581677</code></pre>
 </div>
 </div>
 <ul>
-<li><p>Repeat after replacing two of the response values with missing values (NA_real_).</p>
-<p>– Test your RMSE function with and without specifying the behavior to deal with missing values.</p></li>
+<li>Repeat after replacing two of the response values with missing values (NA_real_).</li>
 </ul>
+<p><mark> Assigned NA value to two random locations in the response vector.<mark></mark></mark></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For loop to randomly select 2 elements of resp to make NA</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) {</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  j<span class="ot">&lt;-</span><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="dv">1</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  j<span class="ot">&lt;-</span><span class="fu">ceiling</span>(<span class="fu">runif</span>(<span class="dv">1</span>,<span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">100</span>))</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  resp[j]<span class="ot">&lt;-</span><span class="cn">NA_real_</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check resp</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>resp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1]  7.674144  5.733128  8.637031 12.068788  4.357179  6.040709  4.843093
-  [8]  6.255948  8.512399  7.587703  8.278962        NA  3.304767        NA
+<pre><code>  [1]  7.674144        NA  8.637031 12.068788  4.357179  6.040709  4.843093
+  [8]  6.255948  8.512399  7.587703  8.278962  8.221201  3.304767  9.299369
  [15]  7.646876  8.504220  4.254724  5.160568  7.550652 10.115022 12.028134
  [22]  7.723097  9.702653  6.337183  5.568563 11.239175  9.903050  4.965503
  [29]  9.656077  8.081564  8.948798  3.708220  5.410925 12.714925  7.666618
+ [36]        NA 11.886290 14.767056  8.670500  7.931076  5.338484  5.097557
+ [43]  3.213884 11.444994  6.093762  3.192188  1.563749  8.753929  4.177170
+ [50] 12.242498  5.781476 12.783701  4.418721  8.442989  4.282396  9.395394
+ [57]  8.255719  6.016290  8.026494  9.180810  2.038727  5.273544  7.225220
+ [64]  6.654107 12.260485 10.688362  9.773488  8.216967  5.093565  6.142304
+ [71]  3.274337  8.547150  9.381826  7.061813  4.016495  7.543794  6.976389
+ [78] 11.550401  5.209433  3.872522 13.043037  8.277356  3.231859  8.553664
+ [85]  4.576422  2.213665 11.475262  6.469006  5.333390  5.656304  6.209727
+ [92]  8.908905  6.956097  9.642321  7.188749 12.413663  6.020730  8.507994
+ [99] 11.776177  3.387353</code></pre>
+</div>
+</div>
+<p>– Test your RMSE function with and without specifying the behavior to deal with missing values.</p>
+<p><mark> Tests the function without and with removal of missing values. When missing values are present the function should return “NA” and when missing values are removed the function should return a double. <mark></mark></mark></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test RMSE with NA vector</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getRMSE</span>(resp,pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test RMSE with additional na.rm argument</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getRMSE</span>(resp,pred,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9673534</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Another common metric for evaluating predictions is mean absolute deviation given by <span class="math display">\[MAE = \frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y_i}|\]</span> Write a function called <code>getMAE()</code> that follows the specification of the <code>getRMSE()</code> function.</li>
+</ol>
+<p><mark> Create the MAE function with ellipses to allow additional arguments. <mark></mark></mark></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>getMAE<span class="ot">&lt;-</span> <span class="cf">function</span>(vec1,vec2,...){</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  mae<span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(vec1<span class="sc">-</span>vec2),...)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  mae</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="1">
+<li>Run the following code to create some response values and predictions.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>resp <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">10</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="fu">lm</span>(resp <span class="sc">~</span> x), <span class="fu">data.frame</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Test your MAE function using this data.</li>
+</ul>
+<p><mark> Test the <code>getMAE</code> function, should return a double. <mark></mark></mark></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getMAE</span>(resp, pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8155776</code></pre>
+</div>
+</div>
+<ul>
+<li>Repeat after replacing two of the response values with missing values (<code>NA_real_</code>).</li>
+</ul>
+<p><mark> Assigned NA value to two random locations in the response vector.<mark></mark></mark></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For loop to randomly select 2 elements of resp to make NA</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) {</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  j<span class="ot">&lt;-</span><span class="fu">ceiling</span>(<span class="fu">runif</span>(<span class="dv">1</span>,<span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">100</span>))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  resp[j]<span class="ot">&lt;-</span><span class="cn">NA_real_</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check resp</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>resp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1]  7.674144        NA  8.637031 12.068788  4.357179  6.040709  4.843093
+  [8]  6.255948  8.512399  7.587703  8.278962  8.221201  3.304767  9.299369
+ [15]  7.646876  8.504220  4.254724  5.160568  7.550652 10.115022 12.028134
+ [22]  7.723097  9.702653  6.337183  5.568563 11.239175  9.903050  4.965503
+ [29]  9.656077  8.081564  8.948798  3.708220  5.410925 12.714925  7.666618
+ [36]        NA 11.886290 14.767056  8.670500  7.931076  5.338484  5.097557
+ [43]  3.213884 11.444994  6.093762  3.192188  1.563749  8.753929  4.177170
+ [50] 12.242498  5.781476 12.783701  4.418721  8.442989  4.282396  9.395394
+ [57]  8.255719  6.016290  8.026494  9.180810  2.038727  5.273544  7.225220
+ [64]  6.654107 12.260485 10.688362  9.773488  8.216967  5.093565  6.142304
+ [71]  3.274337  8.547150  9.381826  7.061813  4.016495  7.543794  6.976389
+ [78] 11.550401  5.209433  3.872522 13.043037  8.277356  3.231859  8.553664
+ [85]  4.576422  2.213665 11.475262  6.469006  5.333390  5.656304  6.209727
+ [92]  8.908905  6.956097  9.642321  7.188749 12.413663  6.020730  8.507994
+ [99] 11.776177  3.387353</code></pre>
+</div>
+</div>
+<p>– Test your MAE function with and without specifying the behavior to deal with missing values.</p>
+<p><mark> Tests the function without and with removal of missing values. When missing values are present the function should return “NA” and when missing values are removed the function should return a double. <mark></mark></mark></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getMAE</span>(resp, pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getMAE</span>(resp,pred,<span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8287559</code></pre>
+</div>
+</div>
+<ol start="5" type="1">
+<li>Let’s create a <strong>wrapper</strong> function that can be used to get either or both metrics returned with a single function call. Do not rewrite your above two function, call them inside the wrapper function (we would call the <code>getRMSE()</code> and <code>getMAE()</code> function <strong>helper</strong> functions). When returning your Values, giving them appropriate names.</li>
+</ol>
+<ul>
+<li>The function should check that two numeric (atomic) vectors have been passed (consider <code>is.vector()</code>,<code>is.atomic()</code>, and <code>is.numeric()</code>). If not, a message should print and the function should exit.</li>
+<li>The function should return both metrics by default and include names. The behavior should be able to be changed using a character string of metrics to find.</li>
+</ul>
+<p><mark> Create a wrapper function. Function has two if/else statements. The first if/else checks if the passed functions are atomic, numeric vectors. If either of the passed arguments are not one of those three conditions then it will stop running and return an error stating which condition it did not meet. The second if/else statement determines which function, <code>getMAE()</code> or <code>getRMSE()</code>, to call. If it is not specified then it will return both functions. <mark></mark></mark></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>my_wrapper<span class="ot">&lt;-</span> <span class="cf">function</span>(vec1,vec2,<span class="at">fun =</span> <span class="cn">NULL</span>,...){</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.vector</span>(vec1) <span class="sc">|</span> <span class="sc">!</span><span class="fu">is.vector</span>(vec2)){</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Error: One or more arguments is not a vector"</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.numeric</span>(vec1) <span class="sc">|</span> <span class="sc">!</span><span class="fu">is.numeric</span>(vec2)){</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Error: One or more arguments is not numeric"</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.atomic</span>(vec1) <span class="sc">|</span> <span class="sc">!</span><span class="fu">is.atomic</span>(vec2)){</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Error: One or more arguments is not atomic"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(fun)){</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    my_fun <span class="ot">&lt;-</span> <span class="fu">get</span>(fun)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="fu">gsub</span>(<span class="st">"get"</span>,<span class="st">''</span>,fun), <span class="fu">my_fun</span>(vec1,vec2,...),<span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>{</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    return_val<span class="ot">&lt;-</span><span class="fu">list</span>(<span class="fu">getMAE</span>(vec1,vec2,...),</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">getRMSE</span>(vec1,vec2,...))</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(return_val)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"MAE"</span>,<span class="st">"RMSE"</span>)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(return_val[])</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="6" type="1">
+<li>Run the following code to create some response values and predictions.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>resp <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">10</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="fu">lm</span>(resp <span class="sc">~</span> x), <span class="fu">data.frame</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Test your new function using this data. Call it once asking for each metric individually and one specifying both metrics.</li>
+</ul>
+<p><mark> Tests the wrapper function. <mark></mark></mark></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">my_wrapper</span>(resp, pred,<span class="st">"getMAE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MAE 0.8155776 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">my_wrapper</span>(resp, pred,<span class="st">"getRMSE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>RMSE 0.9581677 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">my_wrapper</span>(resp, pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$MAE
+[1] 0.8155776
+
+$RMSE
+[1] 0.9581677</code></pre>
+</div>
+</div>
+<ul>
+<li>Repeat with replacing two of the response values with missing values (<code>NA_real_</code>).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For loop to randomly select 2 elements of resp to make NA</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) {</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  j<span class="ot">&lt;-</span><span class="fu">runif</span>(<span class="dv">1</span>,<span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">100</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  resp[j]<span class="ot">&lt;-</span><span class="cn">NA_real_</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check response values</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>resp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1]        NA  5.733128  8.637031 12.068788  4.357179  6.040709  4.843093
+  [8]  6.255948  8.512399  7.587703  8.278962  8.221201  3.304767  9.299369
+ [15]  7.646876  8.504220  4.254724  5.160568  7.550652 10.115022 12.028134
+ [22]  7.723097  9.702653  6.337183  5.568563 11.239175  9.903050  4.965503
+ [29]  9.656077  8.081564  8.948798  3.708220  5.410925 12.714925        NA
  [36] 10.636295 11.886290 14.767056  8.670500  7.931076  5.338484  5.097557
  [43]  3.213884 11.444994  6.093762  3.192188  1.563749  8.753929  4.177170
  [50] 12.242498  5.781476 12.783701  4.418721  8.442989  4.282396  9.395394
@@ -254,16 +435,1414 @@ window.Quarto = {
  [99] 11.776177  3.387353</code></pre>
 </div>
 </div>
+<p>*Finally, test your function by passing it incorrect data (i.e a data frame or something else instead of vectors).</p>
+<p><mark> Test function, which should return an error message.<mark></mark></mark></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test RMSE with NA vector</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getRMSE</span>(resp,pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] NA</code></pre>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Force resp to be a matrix</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>resp<span class="ot">&lt;-</span><span class="fu">as.matrix</span>(resp)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Test wrapper function</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">my_wrapper</span>(resp, pred,<span class="st">"getMAE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in my_wrapper(resp, pred, "getMAE"): Error: One or more arguments is not a vector</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test RMSE with additional na.rm argument</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getRMSE</span>(resp,pred,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="task-3---querying-an-api-and-a-tidy-style-function" class="level1">
+<h1>Task 3 - Querying an API and a Tidy-Style Function</h1>
+<p>For this section, you’ll connect to the news API here: <a href="https://newsapi.org/">newsapi.org</a>. You’ll need to go to register for a key at that web site!</p>
+<ol type="1">
+<li>Use <code>Get()</code> from the <code>httr</code> package to return information about a topic that you are interested in that has been in the new lately (store the result as an R object). Note: We can only look 30 days into the past with a free account.</li>
+</ol>
+<p><mark> This chunk loads the <code>htrr</code> library then uses the <code>GET()</code> function to query articles containing “military” from the API. The chuck also substitutes in the API key from a file outside of the document to maintain privacy. <mark></mark></mark></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load httr package</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get API Key</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>API_key <span class="ot">&lt;-</span> <span class="fu">source</span>(<span class="st">"api_key.r"</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">#contact API and search for articles containing "military"</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>news_search_military<span class="ot">&lt;-</span> <span class="fu">GET</span>(<span class="fu">paste0</span>(<span class="st">"https://newsapi.org/v2/everything?q=military&amp;apiKey="</span>,API_key<span class="sc">$</span>value))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Parse what is returned and find you way to the data frame that has the actual article information in it (check <code>content</code>). Note the first column should be a list column!</li>
+</ol>
+<p><mark> This chunk loads the jsonlite library then parses the JSON file from the previous chunk to display a legible tibble containing articles from the previous search. In an effort to save space only the first 6 rows of the search are displayed and displayed as a table. <mark></mark></mark></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load jsonlite</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'jsonlite' was built under R version 4.4.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'jsonlite'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:purrr':
+
+    flatten</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine structure of the JSON</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(news_search_military,<span class="at">max.level =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0003344786</code></pre>
+<pre><code>List of 10
+ $ url        : chr "https://newsapi.org/v2/everything?q=military&amp;apiKey=6960626c89a2457397c4a992e8b46363"
+ $ status_code: int 200
+ $ headers    :List of 14
+  ..- attr(*, "class")= chr [1:2] "insensitive" "list"
+ $ all_headers:List of 1
+ $ cookies    :'data.frame':    0 obs. of  7 variables:
+ $ content    : raw [1:77376] 7b 22 73 74 ...
+ $ date       : POSIXct[1:1], format: "2024-06-25 15:19:33"
+ $ times      : Named num [1:6] 0 0.00984 0.05451 0.11466 1.47853 ...
+  ..- attr(*, "names")= chr [1:6] "redirect" "namelookup" "connect" "pretransfer" ...
+ $ request    :List of 7
+  ..- attr(*, "class")= chr "request"
+ $ handle     :Class 'curl_handle' &lt;externalptr&gt; 
+ - attr(*, "class")= chr "response"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse the JSON and store as tibble</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>parsed<span class="ot">&lt;-</span><span class="fu">as_tibble</span>(<span class="fu">fromJSON</span>(<span class="fu">rawToChar</span>(news_search_military<span class="sc">$</span>content)))</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># remove misc variable</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>parsed<span class="ot">&lt;-</span>parsed<span class="sc">$</span>articles<span class="sc">|&gt;</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>source)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Print first 6 rows</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(parsed)[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],<span class="st">"simple"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">author</th>
+<th style="text-align: left;">title</th>
+<th style="text-align: left;">description</th>
+<th style="text-align: left;">url</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Conservatives plan to bring back mandatory national service</td>
+<td style="text-align: left;">Every 18-year-old would choose between joining the military or volunteering one weekend a month in the community.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cpddxy9r4mdo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Israel announces military pause on Gaza road to let in aid</td>
+<td style="text-align: left;">The pause will last for several hours every day along a main route from the Kerem Shalom crossing.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cgeepk8rp9xo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jacob Zinkula</td>
+<td style="text-align: left;">Congress weighs adding women to the US military draft</td>
+<td style="text-align: left;">A Senate proposal would require some women to register for the military draft.</td>
+<td style="text-align: left;">https://www.businessinsider.com/women-included-us-military-draft-senate-proposal-low-recruitment-equality-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Young Welsh keen on national service, says Tory</td>
+<td style="text-align: left;">Brecon MP Fay Jones claims she knows “loads” of young people who would “like to play their part”.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cedd44w3xkqo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rachael Davies</td>
+<td style="text-align: left;">Concern rises over gambling crisis embedded in US military system</td>
+<td style="text-align: left;">Concerns are rising over a growing gambling crisis within the US military, with few resources available to help those at… Continue reading Concern rises over gambling crisis embedded in US military system</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">The post Concern</td>
+<td style="text-align: left;">rises over gambling crisis embedded i… https://readwrite.com/concern-rises-over-gambling-crisis-embedded-in-us-mi</td>
+<td style="text-align: left;">litary-system/</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rebecca Rommen</td>
+<td style="text-align: left;">Biden apologizes to Zelenskyy for the military aid delay by Congress while Russia made major advances in Ukraine</td>
+<td style="text-align: left;">Biden apologized to Zelenskyy over the six-month congressional delay in military aid to Ukraine.</td>
+<td style="text-align: left;">https://www.businessinsider.com/biden-apologizes-to-zelenskyy-for-congressional-aid-delay-2024</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Now write a quick function that allows the user to easily query this API. The inputs to the function should be the title/subject to search for (string), a time period to search from (string - you’ll search from that time until the present), and an API key.</li>
+</ol>
+<p><mark> This chunk creates a function to search the newapi. The required argument is a keyword to search with date and APIkey set as defaults. The function creates a url then parses the returned JSON file and stores the results as a tibble which is then displayed for the user. <mark></mark></mark></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>search_NewsAPI <span class="ot">&lt;-</span> <span class="cf">function</span>(title, <span class="at">date=</span><span class="fu">today</span>(<span class="st">"UTC"</span>), <span class="at">APIkey =</span> <span class="fu">source</span>(<span class="st">"api_key.r"</span>)){</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Store title as a character string named keyword</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  keyword<span class="ot">&lt;-</span><span class="fu">as.character</span>(title)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Store date is character string</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  fromTime<span class="ot">&lt;-</span><span class="fu">as.character</span>(date)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Store today's date as character</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  toTime<span class="ot">&lt;-</span><span class="fu">as.character</span>(<span class="fu">today</span>())</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pull APIKey for default</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>  APIkey<span class="ot">&lt;-</span><span class="fu">as.character</span>(APIkey<span class="sc">$</span>value)</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create URL</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>  .x<span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">GET</span>(<span class="fu">paste0</span>(<span class="st">"https://newsapi.org/v2/everything?q="</span>,keyword,<span class="st">"&amp;from="</span>,fromTime,<span class="st">"to="</span>,toTime,<span class="st">"&amp;apiKey="</span>,APIkey))</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Parse data and store as a tibble</span></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>  .d<span class="ot">&lt;-</span><span class="fu">as_tibble</span>(<span class="fu">fromJSON</span>(<span class="fu">rawToChar</span>(.x<span class="sc">$</span>content)))</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Drop unnecessary variable</span></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>  .d<span class="ot">&lt;-</span>.d<span class="sc">$</span>articles<span class="sc">|&gt;</span></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>source)</span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return Tibble</span></span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(knitr<span class="sc">::</span><span class="fu">kable</span>(.d[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],<span class="st">"simple"</span>))</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><mark> This final chunk tests the search function.<mark></mark></mark></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test just using keyword</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">search_NewsAPI</span>(<span class="st">"Army"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">author</th>
+<th style="text-align: left;">title</th>
+<th style="text-align: left;">description</th>
+<th style="text-align: left;">url</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Samanth Subramanian</td>
+<td style="text-align: left;">How to Lead an Army of Digital Sleuths in the Age of AI</td>
+<td style="text-align: left;">Eliot Higgins and his 28,000 forensic foot soldiers at Bellingcat have kept a miraculous nose for truth—and a sharp sense of its limits—in Gaza, Ukraine, and everywhere else atrocities hide online.</td>
+<td style="text-align: left;">https://www.wired.com/story/how-to-lead-army-of-digital-sleuths-age-of-ai/</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Amelia Tait</td>
+<td style="text-align: left;">Before Smartphones, an Army of Real People Helped You Find Stuff on Google</td>
+<td style="text-align: left;">Not too long ago, services like GOOG-411, 118 118 and AQA used actual humans to answer questions with witty responses and encyclopedic knowledge. Today’s search engines could learn something.</td>
+<td style="text-align: left;">https://www.wired.com/story/google-search-118-118-aqa/</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Is Cologne ready for the Tartan Army?</td>
+<td style="text-align: left;">Fans are gathering in the German city for Scotland’s second match against Switzerland on Friday.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/c144y410752o</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">iphillips@businessinsider.com (Ian Phillips,Korey Isbell,Margaret Guzman,Carter Thallon)</td>
+<td style="text-align: left;">Army Green Beret rates every ‘John Wick’ movie</td>
+<td style="text-align: left;">Tu Lam, a former Special Forces soldier, rates the fighting techniques Keanu Reeves uses in the “John Wick” movies.</td>
+<td style="text-align: left;">https://www.businessinsider.com/special-ops-green-beret-rates-john-wick-movies-2024-3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Emma Bowman</td>
+<td style="text-align: left;">U.S. Army aid vessels become unmoored near floating Gaza pier</td>
+<td style="text-align: left;">Rough seas drove two vessels to beach in Israel and two others to anchor on a Gaza beach. Israeli forces are assisting recovery operations near the pier, U.S. officials said. There were no injuries.</td>
+<td style="text-align: left;">https://www.npr.org/2024/05/25/nx-s1-4981449/u-s-army-vessels-beached-israel-gaza</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Michael Peck</td>
+<td style="text-align: left;">The US military’s confidence in smart bombs may have a fatal flaw</td>
+<td style="text-align: left;">Precision warfare appeals to America’s strengths, but a retired US Army officer argues that its effectiveness is a myth.</td>
+<td style="text-align: left;">https://www.businessinsider.com/us-military-confidence-smart-bombs-may-have-a-fatal-flaw-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ella Sherman</td>
+<td style="text-align: left;">A top US Army general says it’s not the right time to build a new drone branch</td>
+<td style="text-align: left;">Gen.&nbsp;James Rainey of US Army Futures Command emphasizes training with UAVs at echelon over creating a dedicated drone branch.</td>
+<td style="text-align: left;">https://www.businessinsider.com/us-army-general-says-not-right-time-for-drone-branch-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Tartan Army’s ‘party of the century’ ahead of Euro 2024 kickoff</td>
+<td style="text-align: left;">The stage is set in Munich for Scotland’s fantasy football match - the opener in Euro 2024.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cpddv1xd8rro</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ella Sherman</td>
+<td style="text-align: left;">I’ve been out as transgender in the US military for a decade, and I don’t have any regrets</td>
+<td style="text-align: left;">Sgt.&nbsp;Cathrine Schmid shares her journey as a trans soldier in the Army, detailing struggles with dysphoria and advocating for transgender rights.</td>
+<td style="text-align: left;">https://www.businessinsider.com/im-transgender-have-been-in-military-for-over-a-decade-2024-5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ella Sherman</td>
+<td style="text-align: left;">Former top US Army general in Europe calls Ukrainian complaints about the M1 Abrams tank ‘BS’</td>
+<td style="text-align: left;">Mark Hertling, a retired US Army general and a former tanker, pushed back on the claims that the Abrams is problematic.</td>
+<td style="text-align: left;">https://www.businessinsider.com/former-us-general-rejects-criticism-from-ukrainians-of-abrams-tanks-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">German army officer jailed for spying for Russia</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_67886e14-9121-4619-b412-0f493aacb88b</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Kyiv’s wonder-weapons are decimating the Russian army</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_e3047831-1e8c-4e6d-8b8d-dd1be0c4793e</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Associated Press</td>
+<td style="text-align: left;">Heavy security in China and Hong Kong on 35th anniversary of Tiananmen crackdown</td>
+<td style="text-align: left;">China has long quashed any memory of the killings, when the government ordered in the army to end the months-long protests and uphold Communist rule. The death toll remains unknown to this day.</td>
+<td style="text-align: left;">https://www.npr.org/2024/06/04/g-s1-2662/china-hong-kong-anniversary-tiananmen-crackdown</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Michelle Swinea</td>
+<td style="text-align: left;">I’ve traveled to many of the most popular spots in Italy. Here are the 4 places I’d return to and the 2 I’d skip next time.</td>
+<td style="text-align: left;">While working on an Army base in Italy, I got to visit many of the country’s hot spots. I’d love to return to places like Verona and Cinque Terre.</td>
+<td style="text-align: left;">https://www.businessinsider.com/italy-places-to-visit-or-skip-from-frequent-traveler-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Emma Ogao</td>
+<td style="text-align: left;">Sudanese army rejects call to end conflict in El Fasher</td>
+<td style="text-align: left;">The Sudanese Army on Thursday rejected a call to return to peace talks following Blinken’s call with Sudanese Army General Burhan earlier this week.</td>
+<td style="text-align: left;">https://abcnews.go.com/International/sudanese-army-rejects-calls-deescalate-fighting-el-fasher/story?id=110705450</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jonathan Lehrfeld</td>
+<td style="text-align: left;">Soldier honors Native American heritage after religious accommodation</td>
+<td style="text-align: left;">This Army officer has chosen to honor his Native American culture after he was granted a religious accommodation.</td>
+<td style="text-align: left;">https://www.yahoo.com/news/soldier-honors-native-american-heritage-173949717.html</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Bloody Sunday: Soldier F appears in court for first time</td>
+<td style="text-align: left;">The former paratrooper is charged with two murders and five attempted murders.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/czvv942520jo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Matthew Loh</td>
+<td style="text-align: left;">An Army veteran spent 2 years looking for his missing son in the desert. Now, he’s running for Congress.</td>
+<td style="text-align: left;">Over the last two years, David Robinson has been running a search and investigation for his son, scouring the Arizona desert for Daniel.</td>
+<td style="text-align: left;">https://www.businessinsider.com/daniel-robinson-missing-son-running-congress-gabby-petito-arizona-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Abhirup Roy</td>
+<td style="text-align: left;">Musk’s small-investor army cheers apparent approval of $56 billion Tesla pay package</td>
+<td style="text-align: left;">Elon Musk’s army of small-investor allies took a victory lap with an endorsement for his $56 billion pay package after the Tesla CEO said shareholders were…</td>
+<td style="text-align: left;">https://finance.yahoo.com/news/musks-small-investor-army-cheers-182703308.html</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">John Deem, Savannah Morning News</td>
+<td style="text-align: left;">More than 100 tortoises were removed from burrows at Hyundai site ahead of construction</td>
+<td style="text-align: left;">More than 100 gopher tortoises were collected and transported about 30 miles from the Hyundai megasite to Fort Stewart Army base, officials say.</td>
+<td style="text-align: left;">https://www.savannahnow.com/story/news/environment/2024/06/17/gopher-tortioises-moved-from-hyundai-site-to-fort-sewart-army-base/74117634007/</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Claudette Riley, Springfield News-Leader</td>
+<td style="text-align: left;">Goose poop closes Table Rock Lake swim beach. Here’s why it’s a problem</td>
+<td style="text-align: left;">The U.S. Army Corps of Engineers encourages campers, swimmers and picnickers not to feed geese along the shores of Table Rock Lake.</td>
+<td style="text-align: left;">https://www.news-leader.com/story/news/local/ozarks/2024/06/03/bacteria-closes-table-rock-lake-swim-beach-likely-culprit-goose-poop/73958583007/</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Conservatives plan to bring back mandatory national service</td>
+<td style="text-align: left;">Every 18-year-old would choose between joining the military or volunteering one weekend a month in the community.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cpddxy9r4mdo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">GOP rep wants answers from Army over revoked military award pin</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_99b1a628-9018-4b93-871b-fbe691a9247b</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Keith Burbank, Treasure Coast Newspapers</td>
+<td style="text-align: left;">An army of oysters will deploy to downtown Stuart to help clean the St.&nbsp;Lucie River</td>
+<td style="text-align: left;">The project will clean up to 1.2 million gallons of water a day from the river in the first year. That’s enough to fill 30,000 bathtubs.</td>
+<td style="text-align: left;">https://www.tcpalm.com/story/news/local/martin-county/2024/05/30/stuart-city-commission-oks-effort-to-help-clean-st-lucie-river/73876550007/</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Moscow warns West after Ukraine told it can hit Russia with Western weapons</td>
+<td style="text-align: left;">Russia accuses Nato and the US of “provoking a new level of tension” over the use of Western-supplied weapons.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/ceqq2zn3zw6o</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Will Shanklin</td>
+<td style="text-align: left;">Russia can reportedly jam Ukraine’s access to Starlink at will</td>
+<td style="text-align: left;">Russia has reportedly found new, more effective ways to knock out Ukraine’s Starlink service. The New York Times said on Friday that the increased interference has disrupted communications at critical moments and is posing “a major threat to Ukraine,” putting…</td>
+<td style="text-align: left;">https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_81380b08-eee1-47ff-8ca8-baaae4b5fbc8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">The pub where Eisenhower and Patton made D-Day plans over dinner</td>
+<td style="text-align: left;">Plans for the Normandy landings were made by senior US commanders in a back room of a Cheshire pub.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cjqq7zw5g27o</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Scotland fans in Munich await 26-year shot at glory</td>
+<td style="text-align: left;">The German city has become a Scottish enclave as fans soak up the atmosphere ahead of Friday’s kick off.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/ck55xp490x0o</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cameron Manley</td>
+<td style="text-align: left;">Ukraine’s use of a Patriot missile system to down Russia’s prized A-50 spy plane was ‘historic,’ said a US air defense officer</td>
+<td style="text-align: left;">Ukraine used a US-made Patriot missile system to down a Russian A-50 spy plane in January, a senior US officer confirmed.</td>
+<td style="text-align: left;">https://www.businessinsider.com/ukraine-uses-patriot-missiles-down-russian-a50-spy-plane-us-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cameron Manley</td>
+<td style="text-align: left;">US-supplied HIMARS ‘completely ineffective’ against superior Russian jamming technology, report says</td>
+<td style="text-align: left;">Russian jamming can cause the HIMAR missiles to miss targets by 50ft or more, The Washington Post reported.</td>
+<td style="text-align: left;">https://www.businessinsider.com/us-himars-completely-ineffective-against-russian-jamming-report-2024-5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Polly Thompson</td>
+<td style="text-align: left;">Defense tech startup Blue Halo makes lasers that shoot drones out of the sky. This is how it got the Army to buy them.</td>
+<td style="text-align: left;">Blue Halo CEO Jonathan Moneymaker sat down with BI to discuss how his defense tech is snapping up contracts.</td>
+<td style="text-align: left;">https://www.businessinsider.com/military-defense-tech-blue-halo-ceo-jonathan-moneymaker-pentagon-2024-5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">German army officer jailed for spying for Russia</td>
+<td style="text-align: left;">The 52-year-old captain admitted to passing information on munitions systems and aircraft to Moscow.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cyeedd6kzdko</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Protests over suspended term for assault by soldier</td>
+<td style="text-align: left;">Cathal Crotty was given a fully suspended sentence after beating a woman in a random street attack.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cx77deq8q3do</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">WAFAA SHURAFA and SAMY MAGDY</td>
+<td style="text-align: left;">Israeli army says it used small munitions in Rafah airstrike, and fire was caused by secondary blast</td>
+<td style="text-align: left;">DEIR AL-BALAH, Gaza Strip (AP) — The Israeli military says an initial investigation into a strike that sparked a deadly weekend fire in a tent camp in the…</td>
+<td style="text-align: left;">https://www.yahoo.com/news/israeli-strikes-kill-16-rafah-101826660.html</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Valentin Baudry, Valentin Moinard et Assma Maad</td>
+<td style="text-align: left;">En direct, Allemagne-Ecosse&nbsp;: la Mannschaft avec Toni Kroos, Florian Wirtz et Kai Havertz</td>
+<td style="text-align: left;">Vendredi soir, à Munich, la Mannschaft affronte la Tartan Army pour le coup d’envoi de la compétition continentale.</td>
+<td style="text-align: left;">https://www.lemonde.fr/sport/live/2024/06/14/en-direct-allemagne-ecosse-suivez-le-match-d-ouverture-de-l-euro-2024-dans-le-groupe-a_6239978_3242.html</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Israeli forces launch operation in central Gaza refugee camp</td>
+<td style="text-align: left;">Palestinians report deadly strikes in Bureij camp as Israel’s army says troops are operating there.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cw44wpj99v7o</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Alexandra Hutzler</td>
+<td style="text-align: left;">Trump continues to demonize migrants, falsely claims they’re ‘building an army’</td>
+<td style="text-align: left;">Trump ratcheted up his anti-immigrant rhetoric at a rally in the South Bronx, where he claimed, without evidence, that migrants coming to the U.S. are forming an “army.”</td>
+<td style="text-align: left;">https://abcnews.go.com/Politics/trump-continues-demonize-migrants-falsely-claims-building-army/story?id=110535732</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">WW2 veteran aged 102 dies on way to D-Day event</td>
+<td style="text-align: left;">The World War Two navy veteran is remembered by a friend as having a “real zest for life”.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cqlle8dljnno</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Attack on candidate’s service record sad - Starmer</td>
+<td style="text-align: left;">Sir Keir Starmer criticises Conservative candidate Johnny Mercer who accused his rival of lying.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/c0dde402z4no</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Evidence of Iran and UAE drones used in Sudan war</td>
+<td style="text-align: left;">The Sudanese army and RSF are both accused of importing foreign drones, violating a UN arms embargo.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/c2vvjz652j1o</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The Associated Press</td>
+<td style="text-align: left;">Russian court sentences U.S. soldier to nearly 4 years, state media reports</td>
+<td style="text-align: left;">The sentencing of Staff Sgt.&nbsp;Gordon Black on charges of stealing and threats of murder further complicates U.S. relations with Russia, which have grown increasingly tense over the fighting in Ukraine.</td>
+<td style="text-align: left;">https://www.npr.org/2024/06/19/g-s1-5159/russia-court-sentences-us-soldier</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Matthew Loh</td>
+<td style="text-align: left;">The US gave sensitive plans for over 1,000 American weapons to Ukraine, says 2 officials who gave only a cryptic hint as to what they are: report</td>
+<td style="text-align: left;">Two US officials told The New York Times that Washington had transferred the plans and translated them as it helps Ukraine boost domestic production.</td>
+<td style="text-align: left;">https://www.businessinsider.com/us-gave-sensitive-plans-1000-weapons-ukraine-2024-5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jennifer Ouellette</td>
+<td style="text-align: left;">NatGeo documents salvage of Tuskegee Airman’s lost WWII plane wreckage</td>
+<td style="text-align: left;">The Real Red Tails investigates the fatal crash of 2nd Lt. Frank Moody in 1944.</td>
+<td style="text-align: left;">https://arstechnica.com/science/2024/06/natgeo-documents-salvage-of-tuskegee-airmans-lost-wwii-plane-wreckage/</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CHRIS MEGERIAN and ZEKE MILLER / AP</td>
+<td style="text-align: left;">Biden Looks to Pointe du Hoc to Inspire Push for Democracy Abroad and at Home</td>
+<td style="text-align: left;">President Joe Biden on Friday looked to summon Americans to defend democracy from threats at home and abroad — and cast&nbsp;an implicit contrast with Donald Trump&nbsp;— by drawing on the heroism of Army Rangers who scaled the seaside cliffs of Pointe du Hoc in&nbsp;the D-…</td>
+<td style="text-align: left;">https://time.com/6986741/bidenpointe-du-hoc-democracy/</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chris Panella</td>
+<td style="text-align: left;">China’s military isn’t just putting on a show of force. It’s rehearsing for the real deal, an assault on Taiwan.</td>
+<td style="text-align: left;">The two-day joint force military exercise is a test of its ability to assault Taiwan if it needs to, the Chinese PLA indicated.</td>
+<td style="text-align: left;">https://www.businessinsider.com/chinas-drills-a-test-as-well-as-show-of-force-2024-5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chris Panella</td>
+<td style="text-align: left;">If the US doesn’t win the electronic warfare fight, the joint force will ‘lose’ and ‘lose very quickly,’ Air Force commander says</td>
+<td style="text-align: left;">US forces are closely watching the war in Ukraine and other conflicts to see how electronic warfare can tip the scales in battle.</td>
+<td style="text-align: left;">https://www.businessinsider.com/us-loses-quickly-if-cant-win-electronic-warfare-fight-officer-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Reuters</td>
+<td style="text-align: left;">Musk’s small-investor army cheers apparent approval of $56 billion pay package</td>
+<td style="text-align: left;">Filed under:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Earnings/Financials,Government/Legal,Green,Tesla</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Continue reading Musk’s small-investor army cheers apparent approval of $56 billion pay pa</td>
+<td style="text-align: left;">ckage</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Musk’s small-investor army cheers apparent approval of $56 billion pay package originally a</td>
+<td style="text-align: left;">ppeared … https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_0c9d943d-cc7a-4ce5-83a2-3adbeb695e86</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">King gives 100th birthday card to D-Day veteran</td>
+<td style="text-align: left;">Jim Mille told the King about his experiences of the Normandy landings into Nazi-occupied France.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cnllgzzgnreo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Marie-Claire Koch</td>
+<td style="text-align: left;">KI-System​ “Maven”: US-Armee vergibt weiteren Millionen-Auftrag an Palantir</td>
+<td style="text-align: left;">Palantir und US-Army kooperieren für das Maven Smart System. Das KI-System sorgt im Nahen Osten bereits für eine beschleunigte Entscheidungsfindung.</td>
+<td style="text-align: left;">https://www.heise.de/news/Maven-US-Armee-vergibt-weiteren-millionenschweren-Auftrag-an-Palantir-9741168.html</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Reuters Videos</td>
+<td style="text-align: left;">Israeli forces strap Palestinian to jeep during raid</td>
+<td style="text-align: left;">STORY: The Israeli military says it’s investigating an incident where Israeli soldiers strapped a wounded Palestinian detainee to the hood of a military…</td>
+<td style="text-align: left;">https://www.yahoo.com/news/israeli-forces-strap-palestinian-jeep-070945020.html</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">‘They set their skin alight’: Survivors accuse Myanmar army of massacre</td>
+<td style="text-align: left;">Myanmar’s military has been accused of killing at least fifty people in a village in Rakhine State.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/ckmm6jep6l7o</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">‘I often wonder why I lived while others died’</td>
+<td style="text-align: left;">On the 80th anniversary of the D-Day landings, surviving veterans share their memories.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/c8001py1ly5o</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bret Devereaux</td>
+<td style="text-align: left;">How to Raise a Tribal Army in Pre-Roman Europe, Part II</td>
+<td style="text-align: left;">This is the second part of our (planned) three part (I) look at how some ‘tribal’ or more correctly, non-state agrarian peoples raised armies to fight the Romans (and others) in the thi…</td>
+<td style="text-align: left;">https://acoup.blog/2024/06/14/collections-how-to-raise-a-tribal-army-in-pre-roman-europe-part-ii-government-without-states/</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Will Shanklin</td>
+<td style="text-align: left;">US House bill would require national security reviews on connected vehicles from China</td>
+<td style="text-align: left;">Newly proposed Congressional legislation would require the US to conduct security reviews for connected vehicles built by automakers from China and “other countries of concern.” Rep.&nbsp;Elissa Slotkin (D-MI), a former CIA analyst and Pentagon official who has ch…</td>
+<td style="text-align: left;">https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_030bbe8d-60c4-4c6d-a734-a96a2fcbc753</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sophia Yan</td>
+<td style="text-align: left;">Syrian gunman opens fire on US embassy in Lebanon</td>
+<td style="text-align: left;">A Syrian gunman has opened fire on the US embassy north of Beirut, the Lebanese army has said.</td>
+<td style="text-align: left;">https://uk.news.yahoo.com/syrian-gunman-opens-fire-us-102310077.html</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Guy Davies, Kevin Shalvey</td>
+<td style="text-align: left;">Shots fired near US Embassy in Beirut</td>
+<td style="text-align: left;">Gunfire was heard “in the vicinity of the entrance to the U.S. Embassy,” officials said.</td>
+<td style="text-align: left;">https://abcnews.go.com/International/shots-fired-us-embassy-beirut/story?id=110851126</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Karina Bondar</td>
+<td style="text-align: left;">Russians may deploy their reserves to one more direction in Kharkiv Oblast</td>
+<td style="text-align: left;">The Russian army is considering the Zolochiv direction as one of the most suitable for an attempt to stretch the Ukrainian military in the north of the Kharkiv region</td>
+<td style="text-align: left;">https://gwaramedia.com/en/official-russians-may-deploy-their-reserves-to-zolochiv-direction/</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Israel announces military pause on Gaza road to let in aid</td>
+<td style="text-align: left;">The pause will last for several hours every day along a main route from the Kerem Shalom crossing.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cgeepk8rp9xo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">The Associated Press</td>
+<td style="text-align: left;">Gaza pier for aid deliveries reconnected after repairs, U.S. Central Command says</td>
+<td style="text-align: left;">A section of the U.S.-built pier designed to carry badly needed aid into Gaza broke apart in storms and rough seas. Food and other supplies will begin to flow soon, U.S. Central Command said Friday.</td>
+<td style="text-align: left;">https://www.npr.org/2024/06/08/g-s1-3560/gaza-pier-us-central-command</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jake Bittle, Grist</td>
+<td style="text-align: left;">A Homeowner Mutiny in Florida Is Leaving the State More Vulnerable to Hurricanes</td>
+<td style="text-align: left;">The federal government is refusing to restore eroded beaches in Pinellas County unless homeowners agree to one condition: public access.</td>
+<td style="text-align: left;">https://gizmodo.com/a-homeowner-mutiny-in-florida-is-leaving-the-state-more-1851517745</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Matthew Loh</td>
+<td style="text-align: left;">China is flexing its missile arsenal in a new simulation for a mass Taiwan attack as the US watches Beijing’s Rocket Force closely</td>
+<td style="text-align: left;">China’s Eastern Theater Command released a simulation video on Friday that mixes CGI and live footage to show a coordinated attack on Taiwan.</td>
+<td style="text-align: left;">https://www.businessinsider.com/china-hype-video-for-mass-taiwan-attack-flexes-missile-forces-2024-5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Thibault Spirlet</td>
+<td style="text-align: left;">Ukraine struck Russian air defenses in Crimea with a barrage of US-supplied ATACMS, reports say</td>
+<td style="text-align: left;">Ukraine used US-supplied ATACMS missiles to strike Russian air defenses in Crimea, damaging key equipment, according to multiple reports.</td>
+<td style="text-align: left;">https://www.businessinsider.com/ukraine-used-atacms-to-hit-russia-air-defenses-crimea-reports-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chris Panella</td>
+<td style="text-align: left;">The US just carried out back-to-back ICBM launches, keeping the Minuteman III sharp until a new missile comes online</td>
+<td style="text-align: left;">The tests demonstrated the Minuteman III’s continued readiness, the Air Force said, as the next ICBM remains in the works.</td>
+<td style="text-align: left;">https://www.businessinsider.com/us-carried-out-back-to-back-icbm-launches-minuteman-iii-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mia Jankowicz,Sinéad Baker</td>
+<td style="text-align: left;">The US is said to be sending a second Patriot to Ukraine, where it’s played havoc with Russian jets and missiles</td>
+<td style="text-align: left;">Patriots have been hailed as a huge success in Ukraine, but Ukraine says it needs far more of the air-defense systems to stop Russian aerial attacks.</td>
+<td style="text-align: left;">https://www.businessinsider.com/us-giving-ukraine-second-patriot-missile-system-fight-russia-reports-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">kevinokemwa@outlook.com (Kevin Okemwa)</td>
+<td style="text-align: left;">Edward Snowden labels OpenAI’s new board appointment a “willful, calculated betrayal of the rights of every person on Earth”</td>
+<td style="text-align: left;">OpenAI appointed Paul Nakasone, a retired US Army General and former National Security Administration (NSA), to its board.</td>
+<td style="text-align: left;">https://www.windowscentral.com/software-apps/edward-snowden-openai-board-betrayal-of-every-person</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Salvation Army, Americorps help clean up, provide meals after tornado hits Greenfield</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_dccd78a8-d369-4699-ba93-8a862c820ade</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">U.S. Army Officer Confirms Russian A-50 Radar Jet Was Shot Down With Patriot Missile</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_5e6804fe-8ad0-4b0a-9765-14f459f17252</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Andreas Donath</td>
+<td style="text-align: left;">Militär: US-Army nutzt Quadcopter-Schwarm zur Minenräumung</td>
+<td style="text-align: left;">Die US-Armee untersucht das Räumen von Minen mit Drohnenschwärmen, die von unbemannten Bodenfahrzeugen ausgesetzt werden. (Drohne, Politik)</td>
+<td style="text-align: left;">https://www.golem.de/sonstiges/zustimmung/auswahl.html?from=https%3A%2F%2Fwww.golem.de%2Fnews%2Fmilitaer-us-army-nutzt-quadcopter-schwarm-zur-minenraeumung-2405-185447.html&amp;referer=https%3A%2F%2Ft.co%2F9f8544f919</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Justin Carter</td>
+<td style="text-align: left;">Thank God(zilla) the MonsterVerse Exists</td>
+<td style="text-align: left;">This year’s a big one for Warner Bros.&nbsp;and Legendary Pictures’ MonsterVerse: the Godzilla film that kicked off the whole shebang turned 10 earlier in May, andits direct sequel Godzilla: King of the Monsters has now hit the five-year mark. The newest MonsterVe…</td>
+<td style="text-align: left;">https://gizmodo.com/monsterverse-godzilla-kong-10-year-anniversary-1851407389</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">‘All I could see was his gravestone - he was only 21’</td>
+<td style="text-align: left;">D-Day servicewoman Ada Chell remembers her suitor Robert Nicholson who died during the war.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cp33x0ykrkno</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cameron Manley</td>
+<td style="text-align: left;">The US has supplied Ukraine with over 4 million shells, as well as tanks and helicopters of Russian origin</td>
+<td style="text-align: left;">Check out the vast range of military hardware, including weapons of Russian origin, the US has supplied Ukraine, according to the State Department.</td>
+<td style="text-align: left;">https://www.businessinsider.com/us-supplied-ukraine-with-4m-shells-old-russian-tanks-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">info@hypebeast.com (Hypebeast)</td>
+<td style="text-align: left;">Nike Unveils the Air Max 1 ’87 in “Light Army”</td>
+<td style="text-align: left;">Nike has unveiled the official images of the Air Max 1 ’87 in “Light Army,” which borrows hues from a traditional military uniform.The neutral offering is crafted with a white mesh base and suede overlays, the latter of which arrives in a two shades: light gr…</td>
+<td style="text-align: left;">https://hypebeast.com/2024/6/nike-air-max-1-87-light-army-dz2628-112-release-info</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ben Mathis-Lilley</td>
+<td style="text-align: left;">Jared Kushner Is Back—and His New Endeavor Could Not Be More On-Brand</td>
+<td style="text-align: left;">Trump’s son-in-law has found a new war criminal to whitewash. For profit!</td>
+<td style="text-align: left;">https://slate.com/news-and-politics/2024/06/jared-kushner-hotel-belgrade-serbia-nato-milosevic-memorial.html</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Paul McNally</td>
+<td style="text-align: left;">Fight for your shareholders and rule the Red Planet in Mars Tactics</td>
+<td style="text-align: left;">Just like in the real world, the people like you and me mean nothing to the big corporations. It’s all… Continue reading Fight for your shareholders and rule the Red Planet in Mars Tactics</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">The post Fight for your shareholders and rule the Red Planet in Mars T… https://readwrit</td>
+<td style="text-align: left;">e.com/fight-for-your-shareholders-and-rule-the-red-planet-in-mars-tactics/</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Israeli activists battle over Gaza-bound aid convoys</td>
+<td style="text-align: left;">Israeli protesters have tried to block border crossings, or even attacked aid convoys bound for Gaza.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cz9950n003yo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Suspicious Minds songwriter Mark James dies</td>
+<td style="text-align: left;">He was also responsible for such enduring hits as Always On My Mind and Hooked On A Feeling.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/c3ggwdvv5kxo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sarang Sheth</td>
+<td style="text-align: left;">DIY Modular Swiss Army Knife lets you choose exactly what tools you want in your Multitool EDC</td>
+<td style="text-align: left;">DIY Modular Swiss Army Knife lets you choose exactly what tools you want in your Multitool EDCMultitool meets a la carte dining – say hello to ZEN, an EDC multitool that lets you choose which tools you want to have on…</td>
+<td style="text-align: left;">https://www.yankodesign.com/2024/06/07/diy-modular-swiss-army-knife-lets-you-choose-exactly-what-tools-you-want-in-your-multitool-edc/</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Larry Madowo</td>
+<td style="text-align: left;">The British Army trains in Kenya. Many women say soldiers raped them and abandoned children they fathered</td>
+<td style="text-align: left;">Seventeen-year-old Marian Pannalossy cuts a striking figure wherever she goes in Archer’s Post, a small town 200 miles north of Nairobi. She lives alone and …</td>
+<td style="text-align: left;">https://www.cnn.com/2024/06/17/africa/british-army-abandoned-children-kenya-intl/index.html</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Alvin Hemedez</td>
+<td style="text-align: left;">Low Market Cap Crypto Presales with the Highest Return Potential in 2024</td>
+<td style="text-align: left;">Meme coins are back in the spotlight, with viral new projects showing surprising strength throughout 2024. This trend makes them… Continue reading Low Market Cap Crypto Presales with the Highest Return Potential in 2024</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">The post Low Market Cap Crypto Presales… https://readwrite.com/low-market-cap-crypto-pre</td>
+<td style="text-align: left;">sales-with-the-highest-return-potential-in-2024/</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The Associated Press</td>
+<td style="text-align: left;">8 Israeli soldiers killed in Gaza in deadliest attack on Israeli forces in months</td>
+<td style="text-align: left;">The attack, coming more than eight months into a grinding war that shows few signs of ending soon, was likely to fuel new calls by Israeli protesters for a cease-fire.</td>
+<td style="text-align: left;">https://www.npr.org/2024/06/15/nx-s1-5007398/israeli-soldiers-killed-gaza</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kat Lonsdorf</td>
+<td style="text-align: left;">Benny Gantz resigns as Israeli war cabinet member</td>
+<td style="text-align: left;">Gantz followed through on his plan to resign from Prime Minister Benjamin Netanyahu’s emergency government on Sunday citing its failure to advance a plan to defeat Hamas in Gaza.</td>
+<td style="text-align: left;">https://www.npr.org/2024/06/09/g-s1-3634/benny-gantz-israeli-war-cabinet-steps-down</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The Associated Press</td>
+<td style="text-align: left;">Israel says it has rescued 4 hostages held in Gaza</td>
+<td style="text-align: left;">Israel said Saturday it rescued four hostages who were kidnapped in a Hamas-led attack on Oct.&nbsp;7. The hostages were rescued in two separate locations in the heart of Nuseirat, it said.</td>
+<td style="text-align: left;">https://www.npr.org/2024/06/08/nx-s1-4997026/israel-gaza-hostages-rescued</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chris Panella</td>
+<td style="text-align: left;">Russia has brought out its S-500, an ‘experimental’ weapon it’s never used before, Ukrainian spy chief says as Ukraine hunts air defenses in Crimea</td>
+<td style="text-align: left;">Russia only has one S-500 and has never used it before. Ukraine says it’s now deployed to defend against Ukraine’s relentless attacks on Crimea.</td>
+<td style="text-align: left;">https://www.businessinsider.com/russia-using-experimental-defense-system-to-defend-crimea-ukraine-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cameron Manley</td>
+<td style="text-align: left;">How an elite Ukrainian unit is using viral videos to attract hundreds of fresh-faced volunteers a month</td>
+<td style="text-align: left;">Over 900 volunteers a month are looking to join the 3rd Separate Assault Brigade, an April report by the Center for European Policy Analysis said.</td>
+<td style="text-align: left;">https://www.businessinsider.com/elite-assault-brigade-reinventing-ukraine-recruitment-drive-russia-war-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lloyd Lee</td>
+<td style="text-align: left;">US-supplied tanks aren’t sufficient in a ‘war of drones,’ Ukrainian soldier told CNN</td>
+<td style="text-align: left;">A Ukrainian soldier told CNN that the armor on US-supplied tanks don’t protect the crew and that they’re the number one target for Russian drones.</td>
+<td style="text-align: left;">https://www.businessinsider.com/us-supplied-tanks-not-enough-war-of-drones-ukraine-russia-2024-5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dominick Reuter</td>
+<td style="text-align: left;">Chipotle is selling ‘Chipotle Boy’ bowls aimed at vest-wearing finance bros</td>
+<td style="text-align: left;">“You know who you are,” Chipotle said in its promo for a double-chicken and white rice bowl, named for its reliable customer cohort.</td>
+<td style="text-align: left;">https://www.businessinsider.com/chipotle-boy-bowl-promo-vest-wearing-finance-bros-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Thibault Spirlet</td>
+<td style="text-align: left;">Russia appears to be placing military facilities near civilian areas in Crimea to deter Ukrainian strikes, experts say</td>
+<td style="text-align: left;">Russia is likely placing military infrastructure close to civilians in Crimea to deter Ukrainian strikes, the Institute for the Study of War said.</td>
+<td style="text-align: left;">https://www.businessinsider.com/russia-puts-military-near-civilians-crimea-deter-ukraine-strikes-isw-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tom Carter</td>
+<td style="text-align: left;">Tesla has put 2 Optimus robots to work on its factory floor</td>
+<td style="text-align: left;">In a rundown of what the company has achieved since 2018, Tesla said it had deployed two Optimus bots “performing tasks in the factory autonomously.”</td>
+<td style="text-align: left;">https://www.businessinsider.com/tesla-says-two-optimus-humanoid-robots-working-in-factory-autonomously-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mikhaila Friel</td>
+<td style="text-align: left;">A drunk Russian soldier killed 7 of his comrades when he threw a grenade into their barracks</td>
+<td style="text-align: left;">Dmitry Lobovikov, a former junior sergeant in the Russian military, said he was drunk when he killed seven soldiers with a grenade.</td>
+<td style="text-align: left;">https://www.businessinsider.com/dmitry-lobovikov-drunk-russian-soldier-killed-colleagues-grenade-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Thibault Spirlet</td>
+<td style="text-align: left;">Russia knows Putin’s Crimea bridge is ‘doomed,’ Ukrainian official says</td>
+<td style="text-align: left;">A Ukrainian official told The Economist that Russia’s military is using another railway route because it knows the Crimea bridge is “doomed.”</td>
+<td style="text-align: left;">https://www.businessinsider.com/russia-knows-putin-crimea-kerch-bridge-doomed-atacms-ukraine-official-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">The ex-con, illegal guns and the fear of Kenya’s police</td>
+<td style="text-align: left;">As Kenya struggles with violent crime an ex-convict tries to persuade men to turn in their weapons.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cd117e52d30o</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Kevin Purdy</td>
+<td style="text-align: left;">Fisker is out of cash, not making cars, and filing for bankruptcy</td>
+<td style="text-align: left;">No word on parts, warranty, or, most crucially, software updates in the future.</td>
+<td style="text-align: left;">https://arstechnica.com/cars/2024/06/ev-firm-fisker-files-for-bankruptcy-months-after-it-stopped-making-the-ocean/</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">130 people die at Sudan hospital amid city siege</td>
+<td style="text-align: left;">Hospitals and markets in El Fasher are experiencing “violent artillery shelling”, a resident says.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cx77pxgn4n7o</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Eleven tonnes of rubbish taken off Himalayan peaks</td>
+<td style="text-align: left;">Four corpses and one skeleton were also removed from Everest and other peaks during an annual clean-up.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cq5539lj1pqo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">y LOLITA C. BALDOR and TARA COPP / AP</td>
+<td style="text-align: left;">U.S.-Built Pier in Gaza Reconnected After Repairs, U.S. Central Command Says</td>
+<td style="text-align: left;">The U.S. military-built pier designed to carry badly needed aid into Gaza by boat has been reconnected to the beach in the besieged territory after a section broke apart in storms and rough seas, and food and other supplies will begin to flow soon, U.S. Centr…</td>
+<td style="text-align: left;">https://time.com/6986630/us-built-pier-gaza-reconnected/</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JOHN LEICESTER</td>
+<td style="text-align: left;">Black D-Day combat medic’s long-denied medal tenderly laid on Omaha Beach where he bled, saved lives</td>
+<td style="text-align: left;">A medal richly deserved but long denied to an African American combat medic wounded on Omaha Beach in the D-Day landings was tenderly laid Friday on the…</td>
+<td style="text-align: left;">https://www.yahoo.com/news/black-d-day-combat-medics-153508413.html</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Suswati Basu</td>
+<td style="text-align: left;">Pro-Russian hackers target European elections with widespread DDoS attacks</td>
+<td style="text-align: left;">The Russia-aligned cyber threat actor known as NoName057 (16) has reportedly announced that it is launching large-scale distributed denial of… Continue reading Pro-Russian hackers target European elections with widespread DDoS attacks</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The post Pro-Russian hac… https://readwrite.com/russian-hackers-ddos-attacks-europe-nona</td>
+<td style="text-align: left;">me057-ukraine/</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Military ‘pause’ on Gaza road inflames divisions in Israeli government</td>
+<td style="text-align: left;">The announcement of a “local, tactical pause” in fighting triggered a furious response from far-right ministers.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/c2992985yk1o</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DPA</td>
+<td style="text-align: left;">Hezbollah head: Nowhere safe in Israel if war breaks out with Lebanon</td>
+<td style="text-align: left;">The head of the pro-Iranian Hezbollah movement in Lebanon, Hassan Nasrallah, vowed Wednesday that nowhere in Israel will be safe if an all-out war erupts…</td>
+<td style="text-align: left;">https://www.yahoo.com/news/hezbollah-head-nowhere-safe-israel-171438361.html</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FATIMA HUSSEIN</td>
+<td style="text-align: left;">US Treasury official visits Ukraine to discuss sanctions on Russia and seizing Russian assets</td>
+<td style="text-align: left;">A senior U.S. Treasury official is in Kyiv this week to talk with government officials about U.S. financial support for Ukraine, efforts to tighten sanctions…</td>
+<td style="text-align: left;">https://finance.yahoo.com/news/us-treasury-official-visits-ukraine-073311513.html</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test using keyword and date</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">search_NewsAPI</span>(<span class="st">"Navy"</span>,<span class="st">"2024-05-30"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">author</th>
+<th style="text-align: left;">title</th>
+<th style="text-align: left;">description</th>
+<th style="text-align: left;">url</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Royal Navy warship deployed to protect trade routes</td>
+<td style="text-align: left;">HMS Duncan sets off from Portsmouth on route to the Middle East and the coast of Yemen.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/c144q2v1v4wo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">WW2 veteran aged 102 dies on way to D-Day event</td>
+<td style="text-align: left;">The World War Two navy veteran is remembered by a friend as having a “real zest for life”.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cqlle8dljnno</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chloe Caldwell</td>
+<td style="text-align: left;">I tried on similar dresses at Gap, Old Navy, and Banana Republic. The most expensive one was the most disappointing.</td>
+<td style="text-align: left;">I tried on similar linen-blend dresses at Banana Republic, Old Navy, and Gap.&nbsp;I compared them based on price, fit, material, and overall value.</td>
+<td style="text-align: left;">https://www.businessinsider.com/shopping-for-similar-dresses-gap-banana-republic-old-navy-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mia Jankowicz</td>
+<td style="text-align: left;">Ukraine aims to deploy squads of up to 20 sea drones to do the job of a warship, commander says</td>
+<td style="text-align: left;">Ukraine’s sea drones will soon operate in squads of up to 20 to harass Russia’s navy, replicating a warship functions, a Ukrainian commander said.</td>
+<td style="text-align: left;">https://www.businessinsider.com/ukraine-deploying-naval-sea-drone-squads-replicate-warship-russia-report-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ella Sherman</td>
+<td style="text-align: left;">The US Navy botched the design of its new $1 billion frigates: report</td>
+<td style="text-align: left;">A watchdog report found flaws in the US Navy’s guided missile frigate designs, stalling construction of the first ship.</td>
+<td style="text-align: left;">https://www.businessinsider.com/navys-22b-frigates-delayed-due-to-design-flaws-says-report-2024-5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cameron Manley</td>
+<td style="text-align: left;">A retired US Navy 4-star admiral arrested in connection with an alleged bribery scheme</td>
+<td style="text-align: left;">Robert P. Burke and two business CEOs were arrested on charges related to their alleged roles in a bribery scheme involving a US government contract.</td>
+<td style="text-align: left;">https://www.businessinsider.com/retired-us-navy-4-star-admiral-arrested-alleged-bribery2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Talia Lakritz</td>
+<td style="text-align: left;">See inside a secret Navy museum on an active base where visitors require an official escort at all times</td>
+<td style="text-align: left;">The museum’s artifacts include atomic bomb casings and part of the submersible that discovered the wreck of the Titanic.</td>
+<td style="text-align: left;">https://www.businessinsider.com/secret-navy-museum-washington-dc-photos-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lauren Frias</td>
+<td style="text-align: left;">Photos show the final cruise of the USS Leyte Gulf as the US Navy phases out its cruiser fleet</td>
+<td style="text-align: left;">See photos of the cruiser USS Leyte Gulf’s final deployment, which included busting a narco-sub carrying 5,000 pounds of cocaine.</td>
+<td style="text-align: left;">https://www.businessinsider.com/uss-leyte-gulf-guided-missile-cruiser-final-deployment-photos-2024-5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Luis Martinez</td>
+<td style="text-align: left;">Pentagon downplays Russian warships arriving in Cuba</td>
+<td style="text-align: left;">The Pentagon is downplaying the arrival of four Russian Navy ships in Cuba although U.S. Navy ships shadowed them as they made their way to Havana.</td>
+<td style="text-align: left;">https://abcnews.go.com/Politics/pentagon-downplays-russian-warships-arriving-cuba/story?id=111071280</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ABC News</td>
+<td style="text-align: left;">WATCH: Fleet of Russian warships reaches Cuban waters</td>
+<td style="text-align: left;">Two U.S. officials confirmed that three U.S. Navy destroyers, a Coast Guard cutter, and Navy P-8 Poseidon reconnaissance aircraft shadowed the Russian flotilla on its way to Cuba.</td>
+<td style="text-align: left;">https://abcnews.go.com/WNT/video/fleet-russian-warships-reaches-cuban-waters-111074162</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">South China Morning Post</td>
+<td style="text-align: left;">South China Sea: photos show Chinese coastguard encircled, boarded Philippine boat</td>
+<td style="text-align: left;">Four Chinese vessels surrounded a Philippine navy boat as coastguard crew boarded during a tense stand-off in the disputed South China Sea on Monday, photos …</td>
+<td style="text-align: left;">https://finance.yahoo.com/news/south-china-sea-photos-show-093000273.html</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LOLITA C. BALDOR</td>
+<td style="text-align: left;">A look at where the Navy’s 11 aircraft carriers are now</td>
+<td style="text-align: left;">The Navy is weighing what to do about the USS Dwight D. Eisenhower aircraft carrier, which has been battling Houthi rebel attacks on shipping in the Red Sea …</td>
+<td style="text-align: left;">https://www.yahoo.com/news/look-where-navys-11-aircraft-105329315.html</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Colombia begins exploring ‘holy grail of shipwrecks’</td>
+<td style="text-align: left;">Exploration of a 300-year-old wreck in the Caribbean Sea with an estimate £16bn trove starts.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/c4nn983qmepo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mia Jankowicz</td>
+<td style="text-align: left;">Video shows Chinese coast guard brandishing an ax in a low-tech clash with the Philippines navy</td>
+<td style="text-align: left;">The Philippines released video showing Chinese coast guard brandishing weapons during a tense encounter in the South China Sea this week.</td>
+<td style="text-align: left;">https://www.businessinsider.com/video-china-coast-guard-wielding-ax-clash-with-philippines-navy-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">vishnu.skar@gmail.com (Vishnu Sarangapurkar)</td>
+<td style="text-align: left;">New leak reaffirms Galaxy Z Fold 6 and Z Flip 6 color options</td>
+<td style="text-align: left;">As we near the Unpacked event, which is likely to happen early next month, a new leak ensures the color options of the upcoming foldables.</td>
+<td style="text-align: left;">https://www.androidcentral.com/phones/galaxy-z-fold-6-s-flip-6-colorways-leak-again</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Thibault Spirlet</td>
+<td style="text-align: left;">The US has been ‘too passive’ with the Houthis in the Red Sea and should go after their leaders, says retired US general</td>
+<td style="text-align: left;">A retired US general said the US has been too passive with the Houthis, letting them dominate the Red Sea, and that it should go after their leaders.</td>
+<td style="text-align: left;">https://www.businessinsider.com/us-passive-red-sea-should-strike-houthi-leaders-retired-general-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cameron Manley</td>
+<td style="text-align: left;">Footage appears to show deadly Houthi sea drone strike on cargo ship in the Red Sea</td>
+<td style="text-align: left;">The Greek-owned cargo carrier was attacked by Yemeni Houthi militants on June 12, a UK maritime agency said.</td>
+<td style="text-align: left;">https://www.businessinsider.com/houthi-rebels-sea-drones-sink-cargo-ship-red-sea-video-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chad de Guzman</td>
+<td style="text-align: left;">Philippines Says Sailor Lost Finger in Latest Confrontation With China in South China Sea</td>
+<td style="text-align: left;">The latest confrontation in the South China Sea has allegedly resulted in a Filipino navy serviceman losing a thumb and risks escalating the conflict.</td>
+<td style="text-align: left;">https://time.com/6989913/philippines-south-china-sea-armed-attack-finger-injury/</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Former Navy Admiral charged with taking bribes while on the job</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_166c67e6-5dd8-486c-99bc-ec50387615e6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jake Epstein</td>
+<td style="text-align: left;">A US attack submarine and one of Russia’s most formidable subs are in Cuba at the same time</td>
+<td style="text-align: left;">The Los Angeles-class submarine USS Helena arrived in Guantanamo Bay just after Russia’s Yasan-class Kazan showed up near Havana.</td>
+<td style="text-align: left;">https://www.businessinsider.com/us-attack-submarine-russia-formidable-subs-both-in-cuba-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chris Panella</td>
+<td style="text-align: left;">US assault ship USS Bataan raced at ‘best speed’ into the Red Sea fight ready to ‘punch somebody in the face’ if needed, top officers say</td>
+<td style="text-align: left;">The fight was one meant for destroyers and cruisers, the ship’s executive officer said, but the Bataan still brought a lot of lethality with it.</td>
+<td style="text-align: left;">https://www.businessinsider.com/us-assault-ship-rushed-red-sea-fight-meant-cruisers-destroyers-2024-5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Benjamin Brimelow</td>
+<td style="text-align: left;">US vs.&nbsp;Chinese aircraft carriers: How the world’s top flattops stack up</td>
+<td style="text-align: left;">The US Navy’s carrier fleet is superior to the Chinese, though China’s new Fujian aircraft carrier is formidable and shows the country’s progress.</td>
+<td style="text-align: left;">https://www.businessinsider.com/us-vs-chinese-navy-aircraft-carriers-2024-5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">US billionaire plans sub trip to Titanic wreck</td>
+<td style="text-align: left;">The private submersible industry was shaken after the implosion of the OceanGate Titan sub last year.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/c1vvr76lddxo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Ex-US admiral charged with bribery for Navy contract</td>
+<td style="text-align: left;">Robert Burke is alleged to have awarded a Navy contract to a firm in exchange for a future job there.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cneegkldwnlo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Watch: Chinese coast guard clashes with Filipino navy</td>
+<td style="text-align: left;">The Philippines says its soldiers were attacked with swords, spears and knives in the South China Sea.</td>
+<td style="text-align: left;">https://www.bbc.com/news/videos/cd1142k45j7o</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">US Navy faces its most intense combat since World War II against Yemen’s Iran-backed Houthi rebels</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_07339862-7b04-4e3c-a5d9-40a3c2200b93</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chris Panella</td>
+<td style="text-align: left;">China wants a fleet of aircraft carriers for pride and power, and it’s building it at a breakneck pace</td>
+<td style="text-align: left;">China is rushing to build a fleet of aircraft carriers and making major technology jumps. It sees deep value in these powerful assets.</td>
+<td style="text-align: left;">https://www.businessinsider.com/why-china-wants-to-build-aircraft-carriers-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dell Cameron, Andrew Couts</td>
+<td style="text-align: left;">Mysterious Hack Destroyed 600,000 Internet Routers</td>
+<td style="text-align: left;">Plus: A whistleblower claims the Biden administration falsified a report on Gaza, “Operation Endgame” disrupts the botnet ecosystem, and more.</td>
+<td style="text-align: left;">https://www.wired.com/story/mysterious-hack-600000-routers-destroyed/</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LOLITA C. BALDOR Associated Press</td>
+<td style="text-align: left;">US submarine pulls into Guantanamo Bay a day after Russian warships arrive in Cuba</td>
+<td style="text-align: left;">A U.S. Navy submarine has pulled into Guantanamo Bay, Cuba, in a show of force as a fleet of Russian warships gather for planned military exercises in the Caribbean</td>
+<td style="text-align: left;">https://abcnews.go.com/US/wireStory/us-submarine-pulls-guantanamo-bay-day-after-russian-111097523</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Suswati Basu</td>
+<td style="text-align: left;">Samsung Galaxy Z Fold 6 may face a massive price hike</td>
+<td style="text-align: left;">Samsung’s next-generation foldable, the Galaxy Z Fold 6, may play an important role for the company. If the phone is… Continue reading Samsung Galaxy Z Fold 6 may face a massive price hike</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The post Samsung Galaxy Z Fold 6 may face a mas</td>
+<td style="text-align: left;">sive price hike appeare… https://readwrite.com/samsung-galaxy-z-fold-6-price-rise/</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chris Panella</td>
+<td style="text-align: left;">The Russian submarine that just showed up off of Cuba is one of a new class of subs that has worried the US and NATO for years</td>
+<td style="text-align: left;">The Yasen-class Kazan is a highly capable submarine, and its strike and stealth capabilities missiles have raised concerns in the West.</td>
+<td style="text-align: left;">https://www.businessinsider.com/russian-submarine-in-cuba-us-nato-worried-about-for-years-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jake Epstein</td>
+<td style="text-align: left;">Video shows the Houthis attack a merchant ship with a naval drone seemingly disguised as a slow fishing boat</td>
+<td style="text-align: left;">Last week’s attack on the M/V Tutor marked the Houthis’ first successful naval drone strike since the rebels started attacking shipping lanes.</td>
+<td style="text-align: left;">https://www.businessinsider.com/houthis-struck-merchant-ship-drone-disguised-fishing-boat-red-sea-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">The Associated Press</td>
+<td style="text-align: left;">Florida told to prepare for more flash flooding Friday following tropical storms</td>
+<td style="text-align: left;">The National Weather Service cautioned that even smaller amounts of precipitation could impact saturated areas, causing flash floods on Friday before the region has a chance to recover.</td>
+<td style="text-align: left;">https://www.npr.org/2024/06/14/g-s1-4376/florida-flash-flood-tropical-storms</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cameron Manley</td>
+<td style="text-align: left;">2 cargo ships caught fire after being hit by projectiles in suspected Houthi attacks off the coast of Yemen</td>
+<td style="text-align: left;">Two cargo ships were hit by a missile and an unknown projectile suspected to have been fired by Houthi rebels, UK maritime agencies reported.</td>
+<td style="text-align: left;">https://www.businessinsider.com/yemens-houthi-rebels-hit-2-ships-red-sea-missiles-drones-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jake Epstein</td>
+<td style="text-align: left;">The Houthis just scored their first drone boat hit on a Red Sea ship</td>
+<td style="text-align: left;">The Iran-backed rebels have used uncrewed surface vessel as part of their attacks on shipping lanes, though without any success until now.</td>
+<td style="text-align: left;">https://www.businessinsider.com/houthis-score-first-hit-red-sea-ship-drone-boat-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mykenna Maniece</td>
+<td style="text-align: left;">Photos show Team USA’s 2024 Olympics ceremony outfits, and they include jeans and moto jackets</td>
+<td style="text-align: left;">Ralph Lauren unveiled Team USA’s Olympic ceremony uniforms and Villagewear collection … and reactions have been mixed.</td>
+<td style="text-align: left;">https://www.businessinsider.com/team-usa-2024-olympics-ceremony-uniforms-ralph-lauren-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JIM GOMEZ</td>
+<td style="text-align: left;">US renews warning it’s obligated to defend the Philippines after its new clash with China at sea</td>
+<td style="text-align: left;">The United States renewed a warning Tuesday that it’s obligated to defend its close treaty ally a day after Filipino navy personnel were injured and their…</td>
+<td style="text-align: left;">https://www.yahoo.com/news/us-renews-warning-obligated-defend-065953757.html</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JIM GOMEZ</td>
+<td style="text-align: left;">Philippines says it won’t back down, but won’t start a war, after clash with Chinese Coast Guard</td>
+<td style="text-align: left;">The president of the Philippines said Sunday his country would not yield to “any foreign power” after Chinese forces injured Filipino navy personnel and…</td>
+<td style="text-align: left;">https://www.yahoo.com/news/philippines-says-wont-back-down-061444101.html</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Associated Press Videos</td>
+<td style="text-align: left;">US navy faces most intense combat since WW2 against Yemen’s Houthi rebels; AP explains</td>
+<td style="text-align: left;">The U.S.-led campaign against Yemen’s Houthi rebels has turned into the most intense running sea battle the U.S. navy has faced since World War II. That’s…</td>
+<td style="text-align: left;">https://www.yahoo.com/news/us-navy-faces-most-intense-124839480.html</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The Associated Press</td>
+<td style="text-align: left;">As Congress scrutinizes the Osprey, families balance grief with pilots’ love for it</td>
+<td style="text-align: left;">Families of service members lost in crashes say that if the Osprey is going to keep flying they want Bell Flight, Boeing and the Pentagon’s V-22 joint program office to make the aircraft safe.</td>
+<td style="text-align: left;">https://www.npr.org/2024/06/11/nx-s1-5001740/osprey-investigation-congress-families-balance-grief-with-pilots-love-for-plane</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brett and Kate McKay</td>
+<td style="text-align: left;">Skill of the Week: Match Your Shoes With Your Suit</td>
+<td style="text-align: left;">An important part of manhood has always been about having the competence to be effective in the world — having the breadth of skills, the&nbsp;savoir-faire, to handle any situation you find yourself in. With that in mind, each Sunday we’ll be republishing one of t…</td>
+<td style="text-align: left;">https://www.artofmanliness.com/style/shoes/match-dress-shoes-with-suit/</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Talia Lakritz</td>
+<td style="text-align: left;">Photos show how being LGBTQ+ in the US military has changed</td>
+<td style="text-align: left;">From “don’t ask, don’t tell” to Pride Month events at the Pentagon, the fight for LGBTQ+ equality in the military has spanned decades.</td>
+<td style="text-align: left;">https://www.businessinsider.com/lgbtq-military-history-photos-dont-ask-dont-tell-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Michele Debczak</td>
+<td style="text-align: left;">How ‘Friend of Dorothy’ Became Code in the Gay Community</td>
+<td style="text-align: left;">In the 1980s, the U.S. Navy carried out a futile search for the “real” Dorothy.</td>
+<td style="text-align: left;">https://www.mentalfloss.com/posts/friend-of-dorothy-meaning</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Thibault Spirlet</td>
+<td style="text-align: left;">Ukraine could soon fire Western-supplied missiles at targets in Russia. But don’t expect that to tilt the war in Ukraine’s favor.</td>
+<td style="text-align: left;">Many nations are saying Ukraine can now use weapons they’ve supplied inside Russia. Experts say it will help, but won’t change the course of the war.</td>
+<td style="text-align: left;">https://www.businessinsider.com/ukraine-using-allies-weapons-russia-soil-wont-change-war-experts-2024-5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chris Panella</td>
+<td style="text-align: left;">The Houthi’s wild claim to have struck a US aircraft carrier is pure fiction</td>
+<td style="text-align: left;">A Houthi claim that their missiles struck the carrier USS Dwight D. Eisenhower is false, a US defense official told BI.</td>
+<td style="text-align: left;">https://www.businessinsider.com/houthi-rebels-didnt-hit-us-aircraft-carrier-as-they-claimed-2024-5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Thibault Spirlet</td>
+<td style="text-align: left;">Russia knows Putin’s Crimea bridge is ‘doomed,’ Ukrainian official says</td>
+<td style="text-align: left;">A Ukrainian official told The Economist that Russia’s military is using another railway route because it knows the Crimea bridge is “doomed.”</td>
+<td style="text-align: left;">https://www.businessinsider.com/russia-knows-putin-crimea-kerch-bridge-doomed-atacms-ukraine-official-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Thibault Spirlet</td>
+<td style="text-align: left;">Video shows Ukrainian sea drones striking 2 ships, as Ukraine continues to harass Russia’s Black Sea Fleet</td>
+<td style="text-align: left;">Ukraine said it used sea drones to hit two Russian ships on Thursday. Footage shows one drone passing through heavy fire to strike a patrol vessel.</td>
+<td style="text-align: left;">https://www.businessinsider.com/video-ukraine-sea-drones-destroy-russia-ships-black-sea-fleet-2024-5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rob Lever / AFP USA</td>
+<td style="text-align: left;">Russia missile video misrepresented amid Caribbean deployment</td>
+<td style="text-align: left;">After Russia deployed military vessels to waters around Cuba for exercises in 2024, social media users claimed a video showed one of its submarines firing…</td>
+<td style="text-align: left;">https://www.yahoo.com/news/russia-missile-video-misrepresented-amid-200349177.html</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">info@hypebeast.com (Hypebeast)</td>
+<td style="text-align: left;">Roddy Ricch Teases New LP, ‘The Navy Album’</td>
+<td style="text-align: left;">Roddy Ricch seems to readying his next release. The rapper recently took to Instagram to tease a new project dubbed The Navy Album.”2024 is PERSONAL not business,” Ricch wrote in an Instagram caption – clearing his feed of everything except the below carousel…</td>
+<td style="text-align: left;">https://hypebeast.com/2024/5/roddy-ricch-teases-the-navy-album</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">David Stratton</td>
+<td style="text-align: left;">A runaway plane took off by itself and spent 3 hours flying unpiloted in 1955</td>
+<td style="text-align: left;">FOR more than three hours on a fine, calm August morning in 1955, the eyes of Sydney’s suburbia were fixed skyward, anxiously watching the flight of a pilotless Auster aeroplane</td>
+<td style="text-align: left;">https://navyhistory.au/aster-shootdown-over-sydney-in-1955/</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Imke Stock</td>
+<td style="text-align: left;">NIPRGPT: US-Militär experimentiert mit KI-Chatbot​</td>
+<td style="text-align: left;">In den USA bringen Air und Space Force einen Chatbot für ihre Mitarbeiter heraus, die damit verschiedene generativen KI-Modelle testen können.​</td>
+<td style="text-align: left;">https://www.heise.de/news/NIPRGPT-US-Militaer-experimentiert-mit-KI-Chatbot-9763782.html</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Oliver Nickel</td>
+<td style="text-align: left;">Auf hoher See: Wie US-Flugzeugträger 5 TByte an Daten täglich übertragen</td>
+<td style="text-align: left;">Durch das Projekt Flank Speed Edge können Schiffe der US Navy mit Cloud-Diensten kommunizieren und Windows-Updates auf See einspielen. (Satelliten, Internet)</td>
+<td style="text-align: left;">https://www.golem.de/sonstiges/zustimmung/auswahl.html?from=https%3A%2F%2Fwww.golem.de%2Fnews%2Fauf-hoher-see-wie-us-flugzeugtraeger-5-tbyte-an-daten-taeglich-uebertragen-2406-186291.html&amp;referer=https%3A%2F%2Ft.co%2Fa2d4f90529</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Paul McNally</td>
+<td style="text-align: left;">Microsoft Flight Simulator releases classic WW2 aircraft to commemorate the D-Day landings with proceeds all going to charity</td>
+<td style="text-align: left;">80 years ago today the historic D-Day landings took place as the Allies invaded the European mainland and suffered a… Continue reading Microsoft Flight Simulator releases classic WW2 aircraft to commemorate the D-Day landings with proceeds all going to charit…</td>
+<td style="text-align: left;">https://readwrite.com/microsoft-flight-simulator-releases-classic-ww2-aircraft-to-commemorate-the-d-day-landings-with-proceeds-all-going-to-charity/</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tips@androidcentral.com (Nickolas Diaz)</td>
+<td style="text-align: left;">HTC’s U24 Pro launch shows off a midrange phone that might surprise you</td>
+<td style="text-align: left;">HTC debuted its new U24 Pro midrange Android device with a few changes over last year’s edition.</td>
+<td style="text-align: left;">https://www.androidcentral.com/phones/htc-u24-pro-midrange-launch</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">techkritiko@gmail.com (Jay Bonggolto)</td>
+<td style="text-align: left;">Galaxy Z Fold 6 and Flip 6 leak reveals some disappointing news about their US pricing</td>
+<td style="text-align: left;">The upcoming Samsung foldables are rumored to be $100 more expensive than their predecessors.</td>
+<td style="text-align: left;">https://www.androidcentral.com/phones/galaxy-z-fold-6-and-flip-6-leak-reveals-some-disappointing-news-about-their-us-pricing</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Joseph Trevithick</td>
+<td style="text-align: left;">Flattop Amphibious Assault Ship To Be Pummeled With Weapons In RIMPAC Wargames</td>
+<td style="text-align: left;">Sinking the ex-USS Tarawa will give the U.S. and its allies experience attacking a carrier-like ship and data on the punishment it can take.</td>
+<td style="text-align: left;">https://www.twz.com/sea/flattop-amphibious-assault-ship-to-be-pummeled-with-weapons-in-rimpac-wargames</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mary Kekatos</td>
+<td style="text-align: left;">Boeing’s Starliner launches its 1st astronaut-crewed flight after several delays</td>
+<td style="text-align: left;">Boeing’s Starliner launched its first astronaut-crewed flight into space on Wednesday after several delays.</td>
+<td style="text-align: left;">https://abcnews.go.com/US/boeings-starliner-set-1st-astronaut-crewed-flight-after/story?id=110855655</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">info@hypebeast.com (Hypebeast)</td>
+<td style="text-align: left;">Tottenham Hotspur Brings Back Its All-Navy Sleeves for Its 2024/25 Home Kit</td>
+<td style="text-align: left;">Tottenham Hotspur and Nike have just unveiled their new home kit for the 2024/25 season – and it brings back the full-navy sleeves to celebrate the iconic colors of the club.Made from Dri-FIT ADV, an innovative fabric designed to keep players cool, light, an…</td>
+<td style="text-align: left;">https://hypebeast.com/2024/6/tottenham-hotspur-nike-new-home-kit</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jake Epstein</td>
+<td style="text-align: left;">Ukraine’s new drone boats are armed with heat-seeking missiles to scare off Russian aircraft, commander says</td>
+<td style="text-align: left;">Ukraine modified its Magura V5 naval drones to carry R-73 short-range air-to-air missiles, giving the systems more firepower in the Black Sea.</td>
+<td style="text-align: left;">https://www.businessinsider.com/ukraine-drone-boats-heat-seeking-missiles-scare-russian-aircraft-commander-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Matthew Loh</td>
+<td style="text-align: left;">China is flexing its missile arsenal in a new simulation for a mass Taiwan attack as the US watches Beijing’s Rocket Force closely</td>
+<td style="text-align: left;">China’s Eastern Theater Command released a simulation video on Friday that mixes CGI and live footage to show a coordinated attack on Taiwan.</td>
+<td style="text-align: left;">https://www.businessinsider.com/china-hype-video-for-mass-taiwan-attack-flexes-missile-forces-2024-5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jake Epstein</td>
+<td style="text-align: left;">Ukraine’s exploding naval drones are hunting down Russian vessels like tugboats after the big Black Sea Fleet warships fell back</td>
+<td style="text-align: left;">Russia has pulled back its larger warships to reduce their vulnerability, leaving Ukraine with only smaller vessels to attack.</td>
+<td style="text-align: left;">https://www.businessinsider.com/ukraine-naval-drones-hunt-russian-tugboats-black-sea-fleet-missing-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lisa Galek</td>
+<td style="text-align: left;">I accidentally bought a counterfeit backpack on Amazon. Now, I know how to avoid sneaky fake products.</td>
+<td style="text-align: left;">I bought a bag on Amazon that I thought was name-brand, but I discovered it was a fake. Now, here’s how I avoid buying counterfeit items on Amazon.</td>
+<td style="text-align: left;">https://www.businessinsider.com/how-to-avoid-buying-fake-item-amazon-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Thibault Spirlet</td>
+<td style="text-align: left;">Russia is patrolling the Black Sea with submarines after its surface fleet got walloped, Ukraine says</td>
+<td style="text-align: left;">Russia is using four submarines, including three cruise missile carriers, to patrol the Black Sea, following major losses, a Ukrainian official said.</td>
+<td style="text-align: left;">https://www.businessinsider.com/russia-using-submarines-patrol-black-sea-after-major-losses-ukraine-2024-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chris Panella</td>
+<td style="text-align: left;">The US military has a plan to turn the Taiwan Strait into an ‘unmanned hellscape’ if China invades, top admiral says</td>
+<td style="text-align: left;">To stop a Chinese invasion of Taiwan, the US plans to employ thousands of unmanned drones and ships, the top US admiral in the Pacific said.</td>
+<td style="text-align: left;">https://www.businessinsider.com/us-plans-turn-taiwan-strait-into-drone-hellscape-against-china-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">South China Morning Post</td>
+<td style="text-align: left;">Chinese coastguard releases South China Sea videos to counter Philippine claims of ‘barbaric’ behaviour</td>
+<td style="text-align: left;">Chinese media outlets have published footage from Chinese coastguards in response to claims that they had blocked the evacuation of a sick Philippine…</td>
+<td style="text-align: left;">https://finance.yahoo.com/news/chinese-coastguard-releases-south-china-093000007.html</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Alvin Hemedez</td>
+<td style="text-align: left;">Will this New Arab Meta Habibi (HABIBI) Token Reach a New All-Time High This Month as Sealana Prepares to Launch?</td>
+<td style="text-align: left;">Habibi token has garnered attention recently, despite its volatile market performance. Over the past week, the token plummeted by 23%,… Continue reading Will this New Arab Meta Habibi (HABIBI) Token Reach a New All-Time High This Month as Sealana Prepares to …</td>
+<td style="text-align: left;">https://readwrite.com/will-this-new-arab-meta-habibi-habibi-token-reach-a-new-all-time-high-this-month-as-sealana-prepares-to-launch/</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Susana Polo</td>
+<td style="text-align: left;">In Through Red Windows, old-money architecture becomes cosmic horror</td>
+<td style="text-align: left;">Through Red Windows, from Batman: Detective Comics’ Ram V and Catwoman’s Joëlle Jones, hits shelves in October to deliver architectural eldritch horror.</td>
+<td style="text-align: left;">https://www.polygon.com/24183350/ram-v-joelle-jones-horror-comic-through-red-windows</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Penguin Solutions</td>
+<td style="text-align: left;">Penguin Solutions expands OriginAI Solution to accelerate AI factory deployment and optimize performance</td>
+<td style="text-align: left;">Penguin’s OriginAI solution includes validated architectures backed by intelligent cluster management software and expert services.</td>
+<td style="text-align: left;">https://venturebeat.com/ai/penguin-solutions-expands-originai-solution-to-accelerate-ai-factory-deployment-and-optimize-performance/</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Charles Gorrivan</td>
+<td style="text-align: left;">AI-Equipped Underwater Drones Helping US Navy Scan for Threats</td>
+<td style="text-align: left;">(Bloomberg) – The US Navy is boosting its deployment of artificial intelligence that automatically detect targets after successfully testing it on…</td>
+<td style="text-align: left;">https://finance.yahoo.com/news/ai-equipped-underwater-drones-helping-153947268.html</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">John Gruber</td>
+<td style="text-align: left;">Willie Mays, Greatest Center Fielder in Baseball History, Dies at 93</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">https://www.sfchronicle.com/sports/giants/article/willie-mays-dead-obituary-17815215.php</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TARA COPP</td>
+<td style="text-align: left;">Russian warships headed to Caribbean for drills as tensions rise over Ukraine, US officials say</td>
+<td style="text-align: left;">The U.S. has been tracking Russian warships and aircraft that are expected to arrive in the Caribbean for a military exercise in the coming weeks, in a…</td>
+<td style="text-align: left;">https://www.yahoo.com/news/russian-warships-headed-caribbean-drills-230025538.html</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Colin Marshall</td>
+<td style="text-align: left;">How Sci-Fi Writers Isaac Asimov &amp; Robert Heinlein Contributed to the War Effort During World War II</td>
+<td style="text-align: left;">Robert Heinlein, Isaac Asimov and L. Sprague De Camp at the Navy Yard in 1944 Robert Heinlein was born in 1907, which put him on the mature side by the time of the United States’ entry into World War II. Isaac Asimov, his younger colleague in science fiction,…</td>
+<td style="text-align: left;">https://www.openculture.com/2024/06/how-sci-fi-writers-isaac-asimov-robert-heinlein-contributed-to-the-war-effort-during-world-war-ii.html</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Al Jazeera</td>
+<td style="text-align: left;">Taiwan arrests former Chinese navy captain over illegal speedboat arrival</td>
+<td style="text-align: left;">The 60-year-old claimed he wished to defect, but Taiwanese officials suspect espionage.</td>
+<td style="text-align: left;">https://www.aljazeera.com/news/2024/6/11/taiwan-arrests-former-chinese-navy-captain-over-illegal-speedboat-arrival</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Miguel Jorge</td>
+<td style="text-align: left;">En la Segunda Guerra Mundial muchos pilotos murieron en su avión. Solo uno fue sepultado con él: Loyce Deen</td>
+<td style="text-align: left;">Desde fuera, la escena del buque de la Armada de Estados Unidos, el USS Essex, parecía poco menos que surrealista. Ocurrió antes del final de la Segunda Guerra Mundial. Con la tripulación reunida en cubierta y gran solemnidad, empujaban lentamente uno de los …</td>
+<td style="text-align: left;">https://www.xataka.com/magnet/segunda-guerra-mundial-muchos-pilotos-murieron-su-avion-solo-uno-fue-sepultado-loyce-deen</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Al Jazeera</td>
+<td style="text-align: left;">Philippines won’t be ‘intimidated’ but won’t start war amid row with China</td>
+<td style="text-align: left;">President Marcos says he’s in favour of peaceful resolution but refuses to be intimidated after a navy clash with China.</td>
+<td style="text-align: left;">https://www.aljazeera.com/news/2024/6/23/philippines-wont-be-intimated-but-wont-start-war-amid-row-with-china</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Javier Pastor</td>
+<td style="text-align: left;">Lo nuevo de NVIDIA es Project G-Assist: un chatbot que te ayuda a pasarte de una vez al jefe final de los videojuegos</td>
+<td style="text-align: left;">En los 80 pasarse algunos juegos era virtualmente imposible, y las ayudas que teníamos se limitaban a los mapas (¡y los POKES!) que publicaban revistas como Micromanía.&nbsp;</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><!-- BREAK 1 --></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Los tiempos han cambiado mucho, y ahora encuent</td>
+<td style="text-align: left;">ras ayuda tanto en foros … https://www.xataka.com/robotica-e-ia/nuevo-nvidia-project-g-assist-chatbot-que-te-ayuda-a-pasarte-vez-al-jefe-final-v</td>
+<td style="text-align: left;">ideojuegos</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chethan Rao</td>
+<td style="text-align: left;">The Galaxy Z Fold 6 looks likely to cost even more than Samsung’s last foldable phone</td>
+<td style="text-align: left;">Get ready to pay an extra $100 for each variant</td>
+<td style="text-align: left;">https://www.androidpolice.com/samsung-galaxy-z-fold-6-us-pricing-variants-leak/</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">From a stage in a lorry to party of 50,000</td>
+<td style="text-align: left;">Pride Cymru started as Mardi Gras in 1999 with a few thousand people and has grown to 50,000.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/c722gygvlevo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">‘All I could see was his gravestone - he was only 21’</td>
+<td style="text-align: left;">D-Day servicewoman Ada Chell remembers her suitor Robert Nicholson who died during the war.</td>
+<td style="text-align: left;">https://www.bbc.com/news/articles/cp33x0ykrkno</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The New Yorker</td>
+<td style="text-align: left;">Briefly Noted Book Reviews</td>
+<td style="text-align: left;">“A Body Made of Glass,” by Caroline Crampton; “Little Seed,” by Wei Tchou; “Faraway the Southern Sky,” by Joseph Andras; and “The Ministry of Time,” by Kaliane Bradley.</td>
+<td style="text-align: left;">https://www.newyorker.com/magazine/2024/06/03/a-body-made-of-glass-little-seed-faraway-the-southern-sky-and-the-ministry-of-time</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">The Associated Press</td>
+<td style="text-align: left;">Russian warships leave Havana’s port after a 5-day visit to Cuba</td>
+<td style="text-align: left;">A fleet of Russian warships, including a nuclear-powered submarine, has left Havana’s port after a five-day visit to Cuba following planned military drills in the Atlantic Ocean</td>
+<td style="text-align: left;">https://abcnews.go.com/Business/wireStory/russian-warships-leave-havanas-port-after-5-day-111192438</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brian Welk</td>
+<td style="text-align: left;">Miles Teller Is Back in the Navy for ‘An Officer and a Gentleman’ Remake at Paramount</td>
+<td style="text-align: left;">Miles Teller will star in a remake of the 1982 Oscar-winner ‘An Officer and a Gentleman’ for Paramount Pictures.</td>
+<td style="text-align: left;">https://www.indiewire.com/news/breaking-news/miles-teller-an-officer-and-a-gentleman-remake-paramount-1235016479/</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">info@hypebeast.com (Hypebeast)</td>
+<td style="text-align: left;">Roddy Ricch Returns with “Survivor’s Remorse”</td>
+<td style="text-align: left;">Roddy Ricch has officially made his return.After taking to socials earlier this week to confirm a new studio LP entitled The Navy Album, the rapper has dropped off his first single presumably from the project; dubbed “Survivor’s Remorse,” the two-and-a-half m…</td>
+<td style="text-align: left;">https://hypebeast.com/2024/5/roddy-ricch-survivors-remorse-single-music-video-stream</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">info@hypebeast.com (Hypebeast)</td>
+<td style="text-align: left;">Seiko Unveils a Duo of Prospex Marinemaster 1965 Diver’s Re-Interpretation Watches</td>
+<td style="text-align: left;">Following Seiko’s previous unveiling of three Prospex Solar Speed Chronographs, the Japanese brand revisits its first-ever Drivers model from the ’60s with two new Marinemaster references.The aptly named Prospex Marinemaster 1965 Diver’s Re-interpretation pay…</td>
+<td style="text-align: left;">https://hypebeast.com/2024/6/seiko-prospex-marinemaster-1965-divers-re-interpretation-green-water-blue-water-navy-release-info</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chris Pandolfo</td>
+<td style="text-align: left;">Chicago couple brutally assaulted by teens while on date, pregnant wife loses baby after attack</td>
+<td style="text-align: left;">A Chicago husband and wife were assaulted Friday while on a date night in the city’s Streeterville neighborhood by a group of teens who said, “we own the…</td>
+<td style="text-align: left;">https://www.yahoo.com/news/chicago-couple-brutally-assaulted-teens-183414830.html</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JIM SALTER</td>
+<td style="text-align: left;">A clemency petition is his last hope. The Missouri inmate is unhappy with it.</td>
+<td style="text-align: left;">As Missouri Gov.&nbsp;Mike Parson weighs a clemency request for condemned inmate David Hosier, at least one person is unhappy with the petition: Hosier himself. …</td>
+<td style="text-align: left;">https://www.yahoo.com/news/clemency-petition-last-hope-missouri-181022298.html</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Angelica Martinez</td>
+<td style="text-align: left;">“The Devil Was In My Bedroom Last Night,” And 28 Other Real-Life Unsolved Mysteries People Experienced And Can’t Forget</td>
+<td style="text-align: left;">Far too many instances of things disappearing before people’s very eyes for my comfort, TBH!!!!View Entire Post ›</td>
+<td style="text-align: left;">https://www.buzzfeed.com/angelicaamartinez/real-life-unsolved-mysteries-june-2024</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Zoë Schlanger</td>
+<td style="text-align: left;">No One Really Understands Clouds</td>
+<td style="text-align: left;">They’re one of the greatest climate mysteries left.</td>
+<td style="text-align: left;">https://www.theatlantic.com/science/archive/2024/05/clouds-climate-change/678484/?utm_source=feed</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">The Associated Press</td>
+<td style="text-align: left;">Gaza pier for aid deliveries reconnected after repairs, U.S. Central Command says</td>
+<td style="text-align: left;">A section of the U.S.-built pier designed to carry badly needed aid into Gaza broke apart in storms and rough seas. Food and other supplies will begin to flow soon, U.S. Central Command said Friday.</td>
+<td style="text-align: left;">https://www.npr.org/2024/06/08/g-s1-3560/gaza-pier-us-central-command</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cameron Manley</td>
+<td style="text-align: left;">Houthi rebel footage appears to show a downed US Reaper drone worth $30 million. It marked the third loss in a month, a report said.</td>
+<td style="text-align: left;">Houthi rebels downed another US MQ-9 Reaper drone in Yemen, AP said, putting debates surrounding the drone’s cost and efficiency in the spotlight.</td>
+<td style="text-align: left;">https://www.businessinsider.com/houthis-downed-3rd-us-reaper-drone-worth-30m-1-month-2024-5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Polly Thompson</td>
+<td style="text-align: left;">Defense tech startup Blue Halo makes lasers that shoot drones out of the sky. This is how it got the Army to buy them.</td>
+<td style="text-align: left;">Blue Halo CEO Jonathan Moneymaker sat down with BI to discuss how his defense tech is snapping up contracts.</td>
+<td style="text-align: left;">https://www.businessinsider.com/military-defense-tech-blue-halo-ceo-jonathan-moneymaker-pentagon-2024-5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ella Sherman</td>
+<td style="text-align: left;">‘Only pirates do this,’ a general said after China’s Coast Guard, armed with bladed weapons, clashed with Philippine boats in the South China Sea</td>
+<td style="text-align: left;">He called China out, accusing its Coast Guard of behaving like pirates. It may not be piracy, but it’s a troubling escalation just the same.</td>
+<td style="text-align: left;">https://www.businessinsider.com/philippine-general-accuses-china-of-piracy-south-china-sea-clash-2024-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BlackBeardPirate</td>
+<td style="text-align: left;">Dockers Men’s Slim Fit Signature Khaki Lux Cotton Stretch Pants (Navy) $15.50</td>
+<td style="text-align: left;">Amazon has Dockers Men’s Slim Fit Signature Khaki Lux Cotton Stretch Pants (Navy) for $15.49. Shipping is free w/ Prime or on $35+ orders.</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p>Thanks to community member BlackBeardPirate for fi … https://slickdeals.net/f/17545572-dockers-men-s-slim-fit-signature-khaki-lux-cotton-stretch-pants-navy-15-50<br>
+Jane Ridley I’m a British mom living in the US. In the UK kids get a shorter summer break and have mandatory uniforms. I’m a British mom in the US. I’m jealous of how my friends’ kids in the UK are taught — from shorter summer breaks to mandatory uniforms. https://www.businessinsider.com/us-vs-uk-differences-in-school-systems-2024-6<br>
+Jake Epstein Satellite images capture Russia’s Black Sea Fleet running from its base in Crimea as Ukraine hit it with missiles and exploding drones Ukraine has waged a highly effective asymmetrical warfare campaign against the Black Sea Fleet, destroying and damaging a number of Russian warships. https://www.businessinsider.com/satellite-images-show-black-sea-fleet-running-away-crimea-ukraine-2024-6<br>
+Chris Panella China’s military isn’t just putting on a show of force. It’s rehearsing for the real deal, an assault on Taiwan. The two-day joint force military exercise is a test of its ability to assault Taiwan if it needs to, the Chinese PLA indicated. https://www.businessinsider.com/chinas-drills-a-test-as-well-as-show-of-force-2024-5<br>
+Katie Notopoulos Gmail is stuck in the Stone Age. It needs to update its tabbed inbox. Gmail added the tabbed inbox in 2013, and it hasn’t adapted to the modern internet. We need more customization. https://www.businessinsider.com/gmail-update-fix-email-tabbed-inbox-2024-5<br>
+Michael Peck A bizarre comment stirred speculation India may try to match China’s carrier fleet India is building a 3rd aircraft carrier and the country’s defense minister suggested that more may soon be in the works. https://www.businessinsider.com/comment-stirs-speculation-india-may-match-chinas-carrier-fleet-2024-5<br>
+Jake Epstein Satellite images show Russia’s putting ships in the path of Ukraine’s naval drones to protect Putin’s prize, but it’s likely not enough The Kerch Bridge has previously fallen victim to several high-profile Ukrainian attacks, including a naval drone strike. https://www.businessinsider.com/russian-ships-not-enough-protect-kerch-bridge-ukraine-naval-drones-2024-6<br>
+Constantine Atlamazoglou Front-line NATO allies are facing an unconventional Russian threat short of war but still quite dangerous The Baltics have been staunch supporters of Ukraine as it fights the Russians, and they have increasingly found themselves in Moscow’s crosshairs. https://www.businessinsider.com/front-line-nato-allies-baltics-face-russian-hybrid-threats-2024-6</p>
 </div>
 </div>
 </section>

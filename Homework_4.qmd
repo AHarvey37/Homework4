@@ -41,7 +41,7 @@ library(tidyverse)
 
 <mark>Create the RMSE function with an ellipsis argument to enable additional arguments to be passed. Add the ellipsis argument to the mean function. Returns the RMSE.<mark>
 
-```{r RMSE Function}
+```{r 1. RMSE Function}
 getRMSE<-function(vec1,vec2,...){
   #rmse <- sqrt(1/length(vec1)*((mean(vec1-vec2,...))^2))
   rmse <- sqrt(mean((vec1-vec2)^2,...))
@@ -51,7 +51,7 @@ getRMSE<-function(vec1,vec2,...){
 
 2. Run the following code to create some response values and predictions.
 
-```{r Create random # vector and linear model vector}
+```{r 2. Create random # vector and linear model vector}
 set.seed(10)
 n <- 100
 x <- runif(n)
@@ -60,9 +60,10 @@ pred <- predict(lm(resp ~ x), data.frame(x))
 ```
 
 * Test your RMSE function using this data. 
+
 <mark> Quickly tests the RMSE function by passing in the response and prediction vectors.<mark>
 
-```{r Test RMSE function}
+```{r 2a. Test RMSE function}
 getRMSE(resp,pred)
 ```
 
@@ -70,7 +71,7 @@ getRMSE(resp,pred)
 
 <mark> Assigned NA value to two random locations in the response vector.<mark>
 
-```{r Assign missing values}
+```{r 2b. Assign missing values}
 # For loop to randomly select 2 elements of resp to make NA
 for (i in 1:2) {
   j<-ceiling(runif(1,min = 1, max = 100))
@@ -84,7 +85,7 @@ resp
   -- Test your RMSE function with and without specifying the behavior to deal with missing values.
   
   <mark> Tests the function without and with removal of missing values. When missing values are present the function should return "NA" and when missing values are removed the function should return a double. <mark>
-```{r Test RMSE function with and without na.rm}
+```{r 2c. Test RMSE function with and without na.rm}
 # Test RMSE with NA vector
 getRMSE(resp,pred)
 
@@ -96,7 +97,7 @@ getRMSE(resp,pred,na.rm=TRUE)
 
 <mark> Create the MAE function with ellipses to allow additional arguments. <mark>
 
-```{r MAE function}
+```{r 3. MAE function}
 getMAE<- function(vec1,vec2,...){
   mae<- mean(abs(vec1-vec2),...)
   mae
@@ -105,7 +106,7 @@ getMAE<- function(vec1,vec2,...){
 
 4. Run the following code to create some response values and predictions. 
 
-```{r Create response adn prediction values}
+```{r 4. Create response adn prediction values}
 set.seed(10)
 n <- 100
 x <- runif(n)
@@ -117,7 +118,7 @@ pred <- predict(lm(resp ~ x), data.frame(x))
 
 <mark> Test the `getMAE` function, should return a double. <mark>
 
-```{r Test MAE}
+```{r 4a. Test MAE}
 getMAE(resp, pred)
 ```
 
@@ -125,7 +126,7 @@ getMAE(resp, pred)
 
 <mark> Assigned NA value to two random locations in the response vector.<mark>
 
-```{r Replace}
+```{r 4b. Replace}
 # For loop to randomly select 2 elements of resp to make NA
 for (i in 1:2) {
   j<-ceiling(runif(1,min = 1, max = 100))
@@ -138,7 +139,7 @@ resp
   
   <mark> Tests the function without and with removal of missing values. When missing values are present the function should return "NA" and when missing values are removed the function should return a double. <mark>
   
-```{r Test MAE function with adn without na.rm}
+```{r 4c. Test MAE function with adn without na.rm}
 getMAE(resp, pred)
 getMAE(resp,pred,na.rm = TRUE)
 ```
@@ -149,7 +150,7 @@ getMAE(resp,pred,na.rm = TRUE)
 * The function should return both metrics by default and include names. The behavior should be able to be changed using a character string of metrics to find. 
 
 <mark> Create a wrapper function. Function has two if/else statements. The first if/else checks if the passed functions are atomic, numeric vectors. If either of the passed arguments are not one of those three conditions then it will stop running and return an error stating which condition it did not meet. The second if/else statement determines which function, `getMAE()` or `getRMSE()`, to call. If it is not specified then it will return both functions. <mark>
-```{r Wrapper function}
+```{r 5. Wrapper function}
 my_wrapper<- function(vec1,vec2,fun = NULL,...){
   if(!is.vector(vec1) | !is.vector(vec2)){
     stop("Error: One or more arguments is not a vector")
@@ -177,7 +178,7 @@ my_wrapper<- function(vec1,vec2,fun = NULL,...){
 
 6. Run the following code to create some response values and predictions. 
 
-```{r}
+```{r 6. Generate random numbers}
 set.seed(10)
 n <- 100
 x <- runif(n)
@@ -189,7 +190,7 @@ pred <- predict(lm(resp ~ x), data.frame(x))
 
 <mark> Tests the wrapper function. <mark>
 
-```{r Test Wrapper}
+```{r 6a. Test Wrapper}
 my_wrapper(resp, pred,"getMAE")
 
 my_wrapper(resp, pred,"getRMSE")
@@ -198,7 +199,7 @@ my_wrapper(resp, pred)
 ```
 * Repeat with replacing two of the response values with missing values (`NA_real_`).
 
-```{r Replace two response values w/ NA}
+```{r 6b. Replace two response values w/ NA}
 # For loop to randomly select 2 elements of resp to make NA
 for (i in 1:2) {
   j<-runif(1,min = 1, max = 100)
@@ -210,9 +211,9 @@ resp
 
 *Finally, test your function by passing it incorrect data (i.e a data frame or something else instead of vectors).
 
-<mark> Test function, which should return an error message. <mark>
+<mark> Test function, which should return an error message.<mark>
 
-```{r Test function with incorrect data, error=TRUE}
+```{r 6c. Test function with incorrect data, error=TRUE}
 # Force resp to be a matrix
 resp<-as.matrix(resp)
 
@@ -227,47 +228,69 @@ For this section, you'll connect to the news API here: [newsapi.org](https://new
 
 1. Use `Get()` from the `httr` package to return information about a topic that you are interested in that has been in the new lately (store the result as an R object). Note: We can only look 30 days into the past with a free account. 
 
-```{r}
+<mark> This chunk loads the `htrr` library then uses the `GET()` function to query articles containing "military" from the API. The chuck also substitutes in the API key from a file outside of the document to maintain privacy. <mark>
+
+```{r 1. Contact API and query military articles}
 #load httr package
 library(httr)
+# Get API Key
+API_key <- source("api_key.r")
 #contact API and search for articles containing "military"
-news_search_military<- GET("https://newsapi.org/v2/everything?q=military&apiKey=6960626c89a2457397c4a992e8b46363")
+news_search_military<- GET(paste0("https://newsapi.org/v2/everything?q=military&apiKey=",API_key$value))
 ```
 
 2. Parse what is returned and find you way to the data frame that has the actual article information in it (check `content`). Note the first column should be a list column!
 
-```{r}
+
+<mark> This chunk loads the jsonlite library then parses the JSON file from the previous chunk to display a legible tibble containing articles from the previous search. In an effort to save space only the first 6 rows of the search are displayed and displayed as a table. <mark>
+```{r 2. Parse Search}
+# Load jsonlite
 library(jsonlite)
+# Examine structure of the JSON
 str(news_search_military,max.level = 1)
+# Parse the JSON and store as tibble
 parsed<-as_tibble(fromJSON(rawToChar(news_search_military$content)))
+# remove misc variable
 parsed<-parsed$articles|>
   select(-source)
-parsed
+# Print first 6 rows
+knitr::kable(head(parsed)[1:4],"simple")
 ```
 
 3. Now write a quick function that allows the user to easily query this API. The inputs to the function should be the title/subject to search for (string), a time period to search from (string - you'll search from that time until the present), and an API key.
 
-```{r API Search Function}
-search_NewsAPI <- function(title, date=today("UTC"), APIkey = "6960626c89a2457397c4a992e8b46363"){
+<mark> This chunk creates a function to search the newapi. The required argument is a keyword to search with date and APIkey set as defaults. The function creates a url then parses the returned JSON file and stores the results as a tibble which is then displayed for the user. <mark>
+
+```{r 3. API Search Function}
+search_NewsAPI <- function(title, date=today("UTC"), APIkey = source("api_key.r")){
+  # Store title as a character string named keyword
   keyword<-as.character(title)
+  # Store date is character string
   fromTime<-as.character(date)
-  toTime<-as.character(today()-days(30))
-  APIkey<-as.character(APIkey)
+  # Store today's date as character
+  toTime<-as.character(today())
+  # Pull APIKey for default
+  APIkey<-as.character(APIkey$value)
+  # Create URL
   .x<- httr::GET(paste0("https://newsapi.org/v2/everything?q=",keyword,"&from=",fromTime,"to=",toTime,"&apiKey=",APIkey))
-  
+  # Parse data and store as a tibble
   .d<-as_tibble(fromJSON(rawToChar(.x$content)))
+  # Drop unnecessary variable
   .d<-.d$articles|>
     select(-source)
-  return(.d)
+  # Return Tibble
+  return(knitr::kable(.d[1:4],"simple"))
 }
 ```
 
+<mark> This final chunk tests the search function.<mark>
+
 ```{r Test function}
-#test just using keyword
+# test just using keyword
 search_NewsAPI("Army")
 
 # test using keyword and date
-search_NewsAPI("monkey","2024-05-30")
+search_NewsAPI("Navy","2024-05-30")
 
 ```
 
