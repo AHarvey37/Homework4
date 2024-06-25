@@ -59,16 +59,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="Homework_4_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Homework_4_files/libs/quarto-html/quarto.js"></script>
-<script src="Homework_4_files/libs/quarto-html/popper.min.js"></script>
-<script src="Homework_4_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="Homework_4_files/libs/quarto-html/anchor.min.js"></script>
-<link href="Homework_4_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Homework_4_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="Homework_4_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="Homework_4_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Homework_4_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -104,8 +136,13 @@ window.Quarto = {
 
 <body class="fullcontent">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -493,8 +530,8 @@ Attaching package: 'jsonlite'</code></pre>
  $ all_headers:List of 1
  $ cookies    :'data.frame':    0 obs. of  7 variables:
  $ content    : raw [1:77376] 7b 22 73 74 ...
- $ date       : POSIXct[1:1], format: "2024-06-25 15:19:33"
- $ times      : Named num [1:6] 0 0.00984 0.05451 0.11466 1.47853 ...
+ $ date       : POSIXct[1:1], format: "2024-06-25 15:30:32"
+ $ times      : Named num [1:6] 0 0.0714 0.1226 0.1992 0.4658 ...
   ..- attr(*, "names")= chr [1:6] "redirect" "namelookup" "connect" "pretransfer" ...
  $ request    :List of 7
   ..- attr(*, "class")= chr "request"
@@ -587,7 +624,7 @@ Attaching package: 'jsonlite'</code></pre>
 <span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>  .d<span class="ot">&lt;-</span>.d<span class="sc">$</span>articles<span class="sc">|&gt;</span></span>
 <span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>source)</span>
 <span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return Tibble</span></span>
-<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(knitr<span class="sc">::</span><span class="fu">kable</span>(.d[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],<span class="st">"simple"</span>))</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(knitr<span class="sc">::</span><span class="fu">kable</span>(.d[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],<span class="st">"simple"</span>))</span>
 <span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><mark> This final chunk tests the search function.<mark></mark></mark></p>
@@ -822,424 +859,424 @@ Attaching package: 'jsonlite'</code></pre>
 <td style="text-align: left;">https://www.bbc.com/news/articles/cw44wpj99v7o</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">msmash</td>
+<td style="text-align: left;">Major Record Labels Sue AI Company Behind ‘BBL Drizzy’</td>
+<td style="text-align: left;">A group of record labels including the big three – Universal Music Group (UMG), Sony Music Entertainment, and Warner Records – are suing two of the top names in generative AI music making, alleging the companies violated their copyright “en masse.” From a r…</td>
+<td style="text-align: left;">https://yro.slashdot.org/story/24/06/24/1523238/major-record-labels-sue-ai-company-behind-bbl-drizzy</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">Alexandra Hutzler</td>
 <td style="text-align: left;">Trump continues to demonize migrants, falsely claims they’re ‘building an army’</td>
 <td style="text-align: left;">Trump ratcheted up his anti-immigrant rhetoric at a rally in the South Bronx, where he claimed, without evidence, that migrants coming to the U.S. are forming an “army.”</td>
 <td style="text-align: left;">https://abcnews.go.com/Politics/trump-continues-demonize-migrants-falsely-claims-building-army/story?id=110535732</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">WW2 veteran aged 102 dies on way to D-Day event</td>
 <td style="text-align: left;">The World War Two navy veteran is remembered by a friend as having a “real zest for life”.</td>
 <td style="text-align: left;">https://www.bbc.com/news/articles/cqlle8dljnno</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">Attack on candidate’s service record sad - Starmer</td>
 <td style="text-align: left;">Sir Keir Starmer criticises Conservative candidate Johnny Mercer who accused his rival of lying.</td>
 <td style="text-align: left;">https://www.bbc.com/news/articles/c0dde402z4no</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">Evidence of Iran and UAE drones used in Sudan war</td>
 <td style="text-align: left;">The Sudanese army and RSF are both accused of importing foreign drones, violating a UN arms embargo.</td>
 <td style="text-align: left;">https://www.bbc.com/news/articles/c2vvjz652j1o</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">The Associated Press</td>
 <td style="text-align: left;">Russian court sentences U.S. soldier to nearly 4 years, state media reports</td>
 <td style="text-align: left;">The sentencing of Staff Sgt.&nbsp;Gordon Black on charges of stealing and threats of murder further complicates U.S. relations with Russia, which have grown increasingly tense over the fighting in Ukraine.</td>
 <td style="text-align: left;">https://www.npr.org/2024/06/19/g-s1-5159/russia-court-sentences-us-soldier</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Matthew Loh</td>
 <td style="text-align: left;">The US gave sensitive plans for over 1,000 American weapons to Ukraine, says 2 officials who gave only a cryptic hint as to what they are: report</td>
 <td style="text-align: left;">Two US officials told The New York Times that Washington had transferred the plans and translated them as it helps Ukraine boost domestic production.</td>
 <td style="text-align: left;">https://www.businessinsider.com/us-gave-sensitive-plans-1000-weapons-ukraine-2024-5</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Jennifer Ouellette</td>
 <td style="text-align: left;">NatGeo documents salvage of Tuskegee Airman’s lost WWII plane wreckage</td>
 <td style="text-align: left;">The Real Red Tails investigates the fatal crash of 2nd Lt. Frank Moody in 1944.</td>
 <td style="text-align: left;">https://arstechnica.com/science/2024/06/natgeo-documents-salvage-of-tuskegee-airmans-lost-wwii-plane-wreckage/</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">CHRIS MEGERIAN and ZEKE MILLER / AP</td>
 <td style="text-align: left;">Biden Looks to Pointe du Hoc to Inspire Push for Democracy Abroad and at Home</td>
 <td style="text-align: left;">President Joe Biden on Friday looked to summon Americans to defend democracy from threats at home and abroad — and cast&nbsp;an implicit contrast with Donald Trump&nbsp;— by drawing on the heroism of Army Rangers who scaled the seaside cliffs of Pointe du Hoc in&nbsp;the D-…</td>
 <td style="text-align: left;">https://time.com/6986741/bidenpointe-du-hoc-democracy/</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Chris Panella</td>
 <td style="text-align: left;">China’s military isn’t just putting on a show of force. It’s rehearsing for the real deal, an assault on Taiwan.</td>
 <td style="text-align: left;">The two-day joint force military exercise is a test of its ability to assault Taiwan if it needs to, the Chinese PLA indicated.</td>
 <td style="text-align: left;">https://www.businessinsider.com/chinas-drills-a-test-as-well-as-show-of-force-2024-5</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Chris Panella</td>
 <td style="text-align: left;">If the US doesn’t win the electronic warfare fight, the joint force will ‘lose’ and ‘lose very quickly,’ Air Force commander says</td>
 <td style="text-align: left;">US forces are closely watching the war in Ukraine and other conflicts to see how electronic warfare can tip the scales in battle.</td>
 <td style="text-align: left;">https://www.businessinsider.com/us-loses-quickly-if-cant-win-electronic-warfare-fight-officer-2024-6</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Reuters</td>
 <td style="text-align: left;">Musk’s small-investor army cheers apparent approval of $56 billion pay package</td>
 <td style="text-align: left;">Filed under:</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Earnings/Financials,Government/Legal,Green,Tesla</td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Continue reading Musk’s small-investor army cheers apparent approval of $56 billion pay pa</td>
 <td style="text-align: left;">ckage</td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Musk’s small-investor army cheers apparent approval of $56 billion pay package originally a</td>
 <td style="text-align: left;">ppeared … https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_0c9d943d-cc7a-4ce5-83a2-3adbeb695e86</td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">King gives 100th birthday card to D-Day veteran</td>
 <td style="text-align: left;">Jim Mille told the King about his experiences of the Normandy landings into Nazi-occupied France.</td>
 <td style="text-align: left;">https://www.bbc.com/news/articles/cnllgzzgnreo</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Marie-Claire Koch</td>
 <td style="text-align: left;">KI-System​ “Maven”: US-Armee vergibt weiteren Millionen-Auftrag an Palantir</td>
 <td style="text-align: left;">Palantir und US-Army kooperieren für das Maven Smart System. Das KI-System sorgt im Nahen Osten bereits für eine beschleunigte Entscheidungsfindung.</td>
 <td style="text-align: left;">https://www.heise.de/news/Maven-US-Armee-vergibt-weiteren-millionenschweren-Auftrag-an-Palantir-9741168.html</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Reuters Videos</td>
 <td style="text-align: left;">Israeli forces strap Palestinian to jeep during raid</td>
 <td style="text-align: left;">STORY: The Israeli military says it’s investigating an incident where Israeli soldiers strapped a wounded Palestinian detainee to the hood of a military…</td>
 <td style="text-align: left;">https://www.yahoo.com/news/israeli-forces-strap-palestinian-jeep-070945020.html</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">‘They set their skin alight’: Survivors accuse Myanmar army of massacre</td>
 <td style="text-align: left;">Myanmar’s military has been accused of killing at least fifty people in a village in Rakhine State.</td>
 <td style="text-align: left;">https://www.bbc.com/news/articles/ckmm6jep6l7o</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">‘I often wonder why I lived while others died’</td>
 <td style="text-align: left;">On the 80th anniversary of the D-Day landings, surviving veterans share their memories.</td>
 <td style="text-align: left;">https://www.bbc.com/news/articles/c8001py1ly5o</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Bret Devereaux</td>
 <td style="text-align: left;">How to Raise a Tribal Army in Pre-Roman Europe, Part II</td>
 <td style="text-align: left;">This is the second part of our (planned) three part (I) look at how some ‘tribal’ or more correctly, non-state agrarian peoples raised armies to fight the Romans (and others) in the thi…</td>
 <td style="text-align: left;">https://acoup.blog/2024/06/14/collections-how-to-raise-a-tribal-army-in-pre-roman-europe-part-ii-government-without-states/</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Will Shanklin</td>
 <td style="text-align: left;">US House bill would require national security reviews on connected vehicles from China</td>
 <td style="text-align: left;">Newly proposed Congressional legislation would require the US to conduct security reviews for connected vehicles built by automakers from China and “other countries of concern.” Rep.&nbsp;Elissa Slotkin (D-MI), a former CIA analyst and Pentagon official who has ch…</td>
 <td style="text-align: left;">https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_030bbe8d-60c4-4c6d-a734-a96a2fcbc753</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Sophia Yan</td>
 <td style="text-align: left;">Syrian gunman opens fire on US embassy in Lebanon</td>
 <td style="text-align: left;">A Syrian gunman has opened fire on the US embassy north of Beirut, the Lebanese army has said.</td>
 <td style="text-align: left;">https://uk.news.yahoo.com/syrian-gunman-opens-fire-us-102310077.html</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Guy Davies, Kevin Shalvey</td>
 <td style="text-align: left;">Shots fired near US Embassy in Beirut</td>
 <td style="text-align: left;">Gunfire was heard “in the vicinity of the entrance to the U.S. Embassy,” officials said.</td>
 <td style="text-align: left;">https://abcnews.go.com/International/shots-fired-us-embassy-beirut/story?id=110851126</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Karina Bondar</td>
 <td style="text-align: left;">Russians may deploy their reserves to one more direction in Kharkiv Oblast</td>
 <td style="text-align: left;">The Russian army is considering the Zolochiv direction as one of the most suitable for an attempt to stretch the Ukrainian military in the north of the Kharkiv region</td>
 <td style="text-align: left;">https://gwaramedia.com/en/official-russians-may-deploy-their-reserves-to-zolochiv-direction/</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">Israel announces military pause on Gaza road to let in aid</td>
 <td style="text-align: left;">The pause will last for several hours every day along a main route from the Kerem Shalom crossing.</td>
 <td style="text-align: left;">https://www.bbc.com/news/articles/cgeepk8rp9xo</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">The Associated Press</td>
 <td style="text-align: left;">Gaza pier for aid deliveries reconnected after repairs, U.S. Central Command says</td>
 <td style="text-align: left;">A section of the U.S.-built pier designed to carry badly needed aid into Gaza broke apart in storms and rough seas. Food and other supplies will begin to flow soon, U.S. Central Command said Friday.</td>
 <td style="text-align: left;">https://www.npr.org/2024/06/08/g-s1-3560/gaza-pier-us-central-command</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Jake Bittle, Grist</td>
 <td style="text-align: left;">A Homeowner Mutiny in Florida Is Leaving the State More Vulnerable to Hurricanes</td>
 <td style="text-align: left;">The federal government is refusing to restore eroded beaches in Pinellas County unless homeowners agree to one condition: public access.</td>
 <td style="text-align: left;">https://gizmodo.com/a-homeowner-mutiny-in-florida-is-leaving-the-state-more-1851517745</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Matthew Loh</td>
 <td style="text-align: left;">China is flexing its missile arsenal in a new simulation for a mass Taiwan attack as the US watches Beijing’s Rocket Force closely</td>
 <td style="text-align: left;">China’s Eastern Theater Command released a simulation video on Friday that mixes CGI and live footage to show a coordinated attack on Taiwan.</td>
 <td style="text-align: left;">https://www.businessinsider.com/china-hype-video-for-mass-taiwan-attack-flexes-missile-forces-2024-5</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Thibault Spirlet</td>
 <td style="text-align: left;">Ukraine struck Russian air defenses in Crimea with a barrage of US-supplied ATACMS, reports say</td>
 <td style="text-align: left;">Ukraine used US-supplied ATACMS missiles to strike Russian air defenses in Crimea, damaging key equipment, according to multiple reports.</td>
 <td style="text-align: left;">https://www.businessinsider.com/ukraine-used-atacms-to-hit-russia-air-defenses-crimea-reports-2024-6</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Chris Panella</td>
 <td style="text-align: left;">The US just carried out back-to-back ICBM launches, keeping the Minuteman III sharp until a new missile comes online</td>
 <td style="text-align: left;">The tests demonstrated the Minuteman III’s continued readiness, the Air Force said, as the next ICBM remains in the works.</td>
 <td style="text-align: left;">https://www.businessinsider.com/us-carried-out-back-to-back-icbm-launches-minuteman-iii-2024-6</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Mia Jankowicz,Sinéad Baker</td>
 <td style="text-align: left;">The US is said to be sending a second Patriot to Ukraine, where it’s played havoc with Russian jets and missiles</td>
 <td style="text-align: left;">Patriots have been hailed as a huge success in Ukraine, but Ukraine says it needs far more of the air-defense systems to stop Russian aerial attacks.</td>
 <td style="text-align: left;">https://www.businessinsider.com/us-giving-ukraine-second-patriot-missile-system-fight-russia-reports-2024-6</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">kevinokemwa@outlook.com (Kevin Okemwa)</td>
 <td style="text-align: left;">Edward Snowden labels OpenAI’s new board appointment a “willful, calculated betrayal of the rights of every person on Earth”</td>
 <td style="text-align: left;">OpenAI appointed Paul Nakasone, a retired US Army General and former National Security Administration (NSA), to its board.</td>
 <td style="text-align: left;">https://www.windowscentral.com/software-apps/edward-snowden-openai-board-betrayal-of-every-person</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">Salvation Army, Americorps help clean up, provide meals after tornado hits Greenfield</td>
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_dccd78a8-d369-4699-ba93-8a862c820ade</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">U.S. Army Officer Confirms Russian A-50 Radar Jet Was Shot Down With Patriot Missile</td>
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_5e6804fe-8ad0-4b0a-9765-14f459f17252</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Andreas Donath</td>
 <td style="text-align: left;">Militär: US-Army nutzt Quadcopter-Schwarm zur Minenräumung</td>
 <td style="text-align: left;">Die US-Armee untersucht das Räumen von Minen mit Drohnenschwärmen, die von unbemannten Bodenfahrzeugen ausgesetzt werden. (Drohne, Politik)</td>
 <td style="text-align: left;">https://www.golem.de/sonstiges/zustimmung/auswahl.html?from=https%3A%2F%2Fwww.golem.de%2Fnews%2Fmilitaer-us-army-nutzt-quadcopter-schwarm-zur-minenraeumung-2405-185447.html&amp;referer=https%3A%2F%2Ft.co%2F9f8544f919</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Justin Carter</td>
 <td style="text-align: left;">Thank God(zilla) the MonsterVerse Exists</td>
 <td style="text-align: left;">This year’s a big one for Warner Bros.&nbsp;and Legendary Pictures’ MonsterVerse: the Godzilla film that kicked off the whole shebang turned 10 earlier in May, andits direct sequel Godzilla: King of the Monsters has now hit the five-year mark. The newest MonsterVe…</td>
 <td style="text-align: left;">https://gizmodo.com/monsterverse-godzilla-kong-10-year-anniversary-1851407389</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">‘All I could see was his gravestone - he was only 21’</td>
 <td style="text-align: left;">D-Day servicewoman Ada Chell remembers her suitor Robert Nicholson who died during the war.</td>
 <td style="text-align: left;">https://www.bbc.com/news/articles/cp33x0ykrkno</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Cameron Manley</td>
 <td style="text-align: left;">The US has supplied Ukraine with over 4 million shells, as well as tanks and helicopters of Russian origin</td>
 <td style="text-align: left;">Check out the vast range of military hardware, including weapons of Russian origin, the US has supplied Ukraine, according to the State Department.</td>
 <td style="text-align: left;">https://www.businessinsider.com/us-supplied-ukraine-with-4m-shells-old-russian-tanks-2024-6</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">info@hypebeast.com (Hypebeast)</td>
 <td style="text-align: left;">Nike Unveils the Air Max 1 ’87 in “Light Army”</td>
 <td style="text-align: left;">Nike has unveiled the official images of the Air Max 1 ’87 in “Light Army,” which borrows hues from a traditional military uniform.The neutral offering is crafted with a white mesh base and suede overlays, the latter of which arrives in a two shades: light gr…</td>
 <td style="text-align: left;">https://hypebeast.com/2024/6/nike-air-max-1-87-light-army-dz2628-112-release-info</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Ben Mathis-Lilley</td>
 <td style="text-align: left;">Jared Kushner Is Back—and His New Endeavor Could Not Be More On-Brand</td>
 <td style="text-align: left;">Trump’s son-in-law has found a new war criminal to whitewash. For profit!</td>
 <td style="text-align: left;">https://slate.com/news-and-politics/2024/06/jared-kushner-hotel-belgrade-serbia-nato-milosevic-memorial.html</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Paul McNally</td>
 <td style="text-align: left;">Fight for your shareholders and rule the Red Planet in Mars Tactics</td>
 <td style="text-align: left;">Just like in the real world, the people like you and me mean nothing to the big corporations. It’s all… Continue reading Fight for your shareholders and rule the Red Planet in Mars Tactics</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">The post Fight for your shareholders and rule the Red Planet in Mars T… https://readwrit</td>
 <td style="text-align: left;">e.com/fight-for-your-shareholders-and-rule-the-red-planet-in-mars-tactics/</td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">Israeli activists battle over Gaza-bound aid convoys</td>
 <td style="text-align: left;">Israeli protesters have tried to block border crossings, or even attacked aid convoys bound for Gaza.</td>
 <td style="text-align: left;">https://www.bbc.com/news/articles/cz9950n003yo</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">Suspicious Minds songwriter Mark James dies</td>
 <td style="text-align: left;">He was also responsible for such enduring hits as Always On My Mind and Hooked On A Feeling.</td>
 <td style="text-align: left;">https://www.bbc.com/news/articles/c3ggwdvv5kxo</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Sarang Sheth</td>
 <td style="text-align: left;">DIY Modular Swiss Army Knife lets you choose exactly what tools you want in your Multitool EDC</td>
 <td style="text-align: left;">DIY Modular Swiss Army Knife lets you choose exactly what tools you want in your Multitool EDCMultitool meets a la carte dining – say hello to ZEN, an EDC multitool that lets you choose which tools you want to have on…</td>
 <td style="text-align: left;">https://www.yankodesign.com/2024/06/07/diy-modular-swiss-army-knife-lets-you-choose-exactly-what-tools-you-want-in-your-multitool-edc/</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Larry Madowo</td>
 <td style="text-align: left;">The British Army trains in Kenya. Many women say soldiers raped them and abandoned children they fathered</td>
 <td style="text-align: left;">Seventeen-year-old Marian Pannalossy cuts a striking figure wherever she goes in Archer’s Post, a small town 200 miles north of Nairobi. She lives alone and …</td>
 <td style="text-align: left;">https://www.cnn.com/2024/06/17/africa/british-army-abandoned-children-kenya-intl/index.html</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Alvin Hemedez</td>
 <td style="text-align: left;">Low Market Cap Crypto Presales with the Highest Return Potential in 2024</td>
 <td style="text-align: left;">Meme coins are back in the spotlight, with viral new projects showing surprising strength throughout 2024. This trend makes them… Continue reading Low Market Cap Crypto Presales with the Highest Return Potential in 2024</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">The post Low Market Cap Crypto Presales… https://readwrite.com/low-market-cap-crypto-pre</td>
 <td style="text-align: left;">sales-with-the-highest-return-potential-in-2024/</td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">The Associated Press</td>
 <td style="text-align: left;">8 Israeli soldiers killed in Gaza in deadliest attack on Israeli forces in months</td>
 <td style="text-align: left;">The attack, coming more than eight months into a grinding war that shows few signs of ending soon, was likely to fuel new calls by Israeli protesters for a cease-fire.</td>
 <td style="text-align: left;">https://www.npr.org/2024/06/15/nx-s1-5007398/israeli-soldiers-killed-gaza</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Kat Lonsdorf</td>
 <td style="text-align: left;">Benny Gantz resigns as Israeli war cabinet member</td>
 <td style="text-align: left;">Gantz followed through on his plan to resign from Prime Minister Benjamin Netanyahu’s emergency government on Sunday citing its failure to advance a plan to defeat Hamas in Gaza.</td>
 <td style="text-align: left;">https://www.npr.org/2024/06/09/g-s1-3634/benny-gantz-israeli-war-cabinet-steps-down</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">The Associated Press</td>
 <td style="text-align: left;">Israel says it has rescued 4 hostages held in Gaza</td>
 <td style="text-align: left;">Israel said Saturday it rescued four hostages who were kidnapped in a Hamas-led attack on Oct.&nbsp;7. The hostages were rescued in two separate locations in the heart of Nuseirat, it said.</td>
 <td style="text-align: left;">https://www.npr.org/2024/06/08/nx-s1-4997026/israel-gaza-hostages-rescued</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Chris Panella</td>
 <td style="text-align: left;">Russia has brought out its S-500, an ‘experimental’ weapon it’s never used before, Ukrainian spy chief says as Ukraine hunts air defenses in Crimea</td>
 <td style="text-align: left;">Russia only has one S-500 and has never used it before. Ukraine says it’s now deployed to defend against Ukraine’s relentless attacks on Crimea.</td>
 <td style="text-align: left;">https://www.businessinsider.com/russia-using-experimental-defense-system-to-defend-crimea-ukraine-2024-6</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Cameron Manley</td>
 <td style="text-align: left;">How an elite Ukrainian unit is using viral videos to attract hundreds of fresh-faced volunteers a month</td>
 <td style="text-align: left;">Over 900 volunteers a month are looking to join the 3rd Separate Assault Brigade, an April report by the Center for European Policy Analysis said.</td>
 <td style="text-align: left;">https://www.businessinsider.com/elite-assault-brigade-reinventing-ukraine-recruitment-drive-russia-war-2024-6</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Lloyd Lee</td>
 <td style="text-align: left;">US-supplied tanks aren’t sufficient in a ‘war of drones,’ Ukrainian soldier told CNN</td>
 <td style="text-align: left;">A Ukrainian soldier told CNN that the armor on US-supplied tanks don’t protect the crew and that they’re the number one target for Russian drones.</td>
 <td style="text-align: left;">https://www.businessinsider.com/us-supplied-tanks-not-enough-war-of-drones-ukraine-russia-2024-5</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Dominick Reuter</td>
 <td style="text-align: left;">Chipotle is selling ‘Chipotle Boy’ bowls aimed at vest-wearing finance bros</td>
 <td style="text-align: left;">“You know who you are,” Chipotle said in its promo for a double-chicken and white rice bowl, named for its reliable customer cohort.</td>
 <td style="text-align: left;">https://www.businessinsider.com/chipotle-boy-bowl-promo-vest-wearing-finance-bros-2024-6</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Thibault Spirlet</td>
 <td style="text-align: left;">Russia appears to be placing military facilities near civilian areas in Crimea to deter Ukrainian strikes, experts say</td>
 <td style="text-align: left;">Russia is likely placing military infrastructure close to civilians in Crimea to deter Ukrainian strikes, the Institute for the Study of War said.</td>
 <td style="text-align: left;">https://www.businessinsider.com/russia-puts-military-near-civilians-crimea-deter-ukraine-strikes-isw-2024-6</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Tom Carter</td>
 <td style="text-align: left;">Tesla has put 2 Optimus robots to work on its factory floor</td>
 <td style="text-align: left;">In a rundown of what the company has achieved since 2018, Tesla said it had deployed two Optimus bots “performing tasks in the factory autonomously.”</td>
 <td style="text-align: left;">https://www.businessinsider.com/tesla-says-two-optimus-humanoid-robots-working-in-factory-autonomously-2024-6</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Mikhaila Friel</td>
 <td style="text-align: left;">A drunk Russian soldier killed 7 of his comrades when he threw a grenade into their barracks</td>
 <td style="text-align: left;">Dmitry Lobovikov, a former junior sergeant in the Russian military, said he was drunk when he killed seven soldiers with a grenade.</td>
 <td style="text-align: left;">https://www.businessinsider.com/dmitry-lobovikov-drunk-russian-soldier-killed-colleagues-grenade-2024-6</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Thibault Spirlet</td>
 <td style="text-align: left;">Russia knows Putin’s Crimea bridge is ‘doomed,’ Ukrainian official says</td>
 <td style="text-align: left;">A Ukrainian official told The Economist that Russia’s military is using another railway route because it knows the Crimea bridge is “doomed.”</td>
 <td style="text-align: left;">https://www.businessinsider.com/russia-knows-putin-crimea-kerch-bridge-doomed-atacms-ukraine-official-2024-6</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">The ex-con, illegal guns and the fear of Kenya’s police</td>
 <td style="text-align: left;">As Kenya struggles with violent crime an ex-convict tries to persuade men to turn in their weapons.</td>
 <td style="text-align: left;">https://www.bbc.com/news/articles/cd117e52d30o</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Kevin Purdy</td>
 <td style="text-align: left;">Fisker is out of cash, not making cars, and filing for bankruptcy</td>
 <td style="text-align: left;">No word on parts, warranty, or, most crucially, software updates in the future.</td>
 <td style="text-align: left;">https://arstechnica.com/cars/2024/06/ev-firm-fisker-files-for-bankruptcy-months-after-it-stopped-making-the-ocean/</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">130 people die at Sudan hospital amid city siege</td>
 <td style="text-align: left;">Hospitals and markets in El Fasher are experiencing “violent artillery shelling”, a resident says.</td>
 <td style="text-align: left;">https://www.bbc.com/news/articles/cx77pxgn4n7o</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">Eleven tonnes of rubbish taken off Himalayan peaks</td>
 <td style="text-align: left;">Four corpses and one skeleton were also removed from Everest and other peaks during an annual clean-up.</td>
 <td style="text-align: left;">https://www.bbc.com/news/articles/cq5539lj1pqo</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">y LOLITA C. BALDOR and TARA COPP / AP</td>
 <td style="text-align: left;">U.S.-Built Pier in Gaza Reconnected After Repairs, U.S. Central Command Says</td>
 <td style="text-align: left;">The U.S. military-built pier designed to carry badly needed aid into Gaza by boat has been reconnected to the beach in the besieged territory after a section broke apart in storms and rough seas, and food and other supplies will begin to flow soon, U.S. Centr…</td>
 <td style="text-align: left;">https://time.com/6986630/us-built-pier-gaza-reconnected/</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">JOHN LEICESTER</td>
 <td style="text-align: left;">Black D-Day combat medic’s long-denied medal tenderly laid on Omaha Beach where he bled, saved lives</td>
 <td style="text-align: left;">A medal richly deserved but long denied to an African American combat medic wounded on Omaha Beach in the D-Day landings was tenderly laid Friday on the…</td>
 <td style="text-align: left;">https://www.yahoo.com/news/black-d-day-combat-medics-153508413.html</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Suswati Basu</td>
 <td style="text-align: left;">Pro-Russian hackers target European elections with widespread DDoS attacks</td>
 <td style="text-align: left;">The Russia-aligned cyber threat actor known as NoName057 (16) has reportedly announced that it is launching large-scale distributed denial of… Continue reading Pro-Russian hackers target European elections with widespread DDoS attacks</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">The post Pro-Russian hac… https://readwrite.com/russian-hackers-ddos-attacks-europe-nona</td>
 <td style="text-align: left;">me057-ukraine/</td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">Military ‘pause’ on Gaza road inflames divisions in Israeli government</td>
 <td style="text-align: left;">The announcement of a “local, tactical pause” in fighting triggered a furious response from far-right ministers.</td>
 <td style="text-align: left;">https://www.bbc.com/news/articles/c2992985yk1o</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">DPA</td>
 <td style="text-align: left;">Hezbollah head: Nowhere safe in Israel if war breaks out with Lebanon</td>
 <td style="text-align: left;">The head of the pro-Iranian Hezbollah movement in Lebanon, Hassan Nasrallah, vowed Wednesday that nowhere in Israel will be safe if an all-out war erupts…</td>
 <td style="text-align: left;">https://www.yahoo.com/news/hezbollah-head-nowhere-safe-israel-171438361.html</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">FATIMA HUSSEIN</td>
-<td style="text-align: left;">US Treasury official visits Ukraine to discuss sanctions on Russia and seizing Russian assets</td>
-<td style="text-align: left;">A senior U.S. Treasury official is in Kyiv this week to talk with government officials about U.S. financial support for Ukraine, efforts to tighten sanctions…</td>
-<td style="text-align: left;">https://finance.yahoo.com/news/us-treasury-official-visits-ukraine-073311513.html</td>
 </tr>
 </tbody>
 </table>
@@ -1845,10 +1882,11 @@ Jake Epstein Satellite images show Russia’s putting ships in the path of Ukrai
 Constantine Atlamazoglou Front-line NATO allies are facing an unconventional Russian threat short of war but still quite dangerous The Baltics have been staunch supporters of Ukraine as it fights the Russians, and they have increasingly found themselves in Moscow’s crosshairs. https://www.businessinsider.com/front-line-nato-allies-baltics-face-russian-hybrid-threats-2024-6</p>
 </div>
 </div>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
